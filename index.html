@@ -10,7 +10,6 @@
     body { font-family: 'Tajawal', sans-serif; background-color: #121212; color: #e0e0e0; }
     .accent-bg { background-color: #f97316; }
     .accent-bg:hover { background-color: #ea580c; }
-    .accent-border { border-color: #f97316; }
     .card-bg { background-color: #1e1e1e; }
     .modal-bg { background-color: #1e1e1e; }
   </style>
@@ -35,6 +34,24 @@
     <!-- بطاقات الخدمات -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       
+      <!-- ببجي موبايل -->
+      <div class="card-bg rounded-2xl p-6 border border-gray-800 hover:border-orange-500 transition-all shadow-lg flex flex-col justify-between">
+        <div>
+          <h3 class="text-xl font-extrabold text-orange-500 mb-2">ببجي موبايل (PUBG UC)</h3>
+          <p class="text-gray-400 text-sm mb-4">شحن شدات ببجي الرسمية بالمعرّف (ID)</p>
+          <div class="space-y-2 mb-6">
+            <label class="block text-xs font-bold text-gray-300">اختر العرض:</label>
+            <select id="pubg-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
+              <option value="UC 60" data-price="13.5">UC 60 - 13.5 دينار</option>
+              <option value="UC 325" data-price="65.0">UC 325 - 65.0 دينار</option>
+              <option value="UC 660" data-price="130.0">UC 660 - 130.0 دينار</option>
+              <option value="UC 1800" data-price="320.0">UC 1800 - 320.0 دينار</option>
+            </select>
+          </div>
+        </div>
+        <button onclick="openModal('ببجي موبايل (PUBG UC)', 'pubg-offers', true)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب الآن</button>
+      </div>
+
       <!-- فري فاير -->
       <div class="card-bg rounded-2xl p-6 border border-gray-800 hover:border-orange-500 transition-all shadow-lg flex flex-col justify-between">
         <div>
@@ -43,14 +60,82 @@
           <div class="space-y-2 mb-6">
             <label class="block text-xs font-bold text-gray-300">اختر العرض:</label>
             <select id="ff-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
-              <option value="110 Diamonds" data-price="13.5">110 Diamonds - 13.5 دينار</option>
-              <option value="210 Diamonds" data-price="26.264">210 Diamonds - 26.264 دينار</option>
-              <option value="530 Diamonds" data-price="65.0">530 Diamonds - 65.0 دينار</option>
-              <option value="1080 Diamonds" data-price="130.0">1080 Diamonds - 130.0 دينار</option>
+              <option value="110 Diamonds" data-price="15.0">110 Diamonds - 15.0 دينار</option>
+              <option value="210 Diamonds" data-price="29.0">210 Diamonds - 29.0 دينار</option>
+              <option value="530 Diamonds" data-price="70.0">530 Diamonds - 70.0 دينار</option>
             </select>
           </div>
         </div>
-        <button onclick="openModal('فراي فاير (Free Fire)', 'ff-offers')" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب الآن</button>
+        <button onclick="openModal('فراي فاير (Free Fire)', 'ff-offers', true)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب الآن</button>
+      </div>
+
+      <!-- بلايستيشن أمريكي -->
+      <div class="card-bg rounded-2xl p-6 border border-gray-800 hover:border-orange-500 transition-all shadow-lg flex flex-col justify-between">
+        <div>
+          <h3 class="text-xl font-extrabold text-orange-500 mb-2">Playstation Network USA</h3>
+          <p class="text-gray-400 text-sm mb-4">بطاقات ستور بلايستيشن أمريكي (كود فوري)</p>
+          <div class="space-y-2 mb-6">
+            <label class="block text-xs font-bold text-gray-300">اختر العرض:</label>
+            <select id="psn-usa" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
+              <option value="PSN 10$" data-price="125.0">PSN 10$ - 125.0 دينار</option>
+              <option value="PSN 25$" data-price="310.0">PSN 25$ - 310.0 دينار</option>
+            </select>
+          </div>
+        </div>
+        <button onclick="openModal('Playstation Network USA', 'psn-usa', false)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب الآن</button>
+      </div>
+
+      <!-- بلايستيشن إماراتي -->
+      <div class="card-bg rounded-2xl p-6 border border-gray-800 hover:border-orange-500 transition-all shadow-lg flex flex-col justify-between">
+        <div>
+          <h3 class="text-xl font-extrabold text-orange-500 mb-2">Playstation Network UAE</h3>
+          <p class="text-gray-400 text-sm mb-4">بطاقات ستور بلايستيشن إماراتي (كود فوري)</p>
+          <div class="space-y-2 mb-6">
+            <label class="block text-xs font-bold text-gray-300">اختر العرض:</label>
+            <select id="psn-uae" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
+              <option value="PSN UAE 10$" data-price="128.0">PSN UAE 10$ - 128.0 دينار</option>
+              <option value="PSN UAE 20$" data-price="255.0">PSN UAE 20$ - 255.0 دينار</option>
+            </select>
+          </div>
+        </div>
+        <button onclick="openModal('Playstation Network UAE', 'psn-uae', false)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب الآن</button>
+      </div>
+
+      <!-- رايزر جولد -->
+      <div class="card-bg rounded-2xl p-6 border border-gray-800 hover:border-orange-500 transition-all shadow-lg flex flex-col justify-between">
+        <div>
+          <h3 class="text-xl font-extrabold text-orange-500 mb-2">Razer Gold</h3>
+          <p class="text-gray-400 text-sm mb-4">شحن ريزر جولد (Global)</p>
+          <div class="space-y-2 mb-6">
+            <label class="block text-xs font-bold text-gray-300">اختر العرض:</label>
+            <select id="razer-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
+              <option value="Razer 1$ Gold" data-price="13.5">Razer 1$ - 13.5 دينار</option>
+              <option value="Razer 2$ Gold" data-price="26.0">Razer 2$ - 26.0 دينار</option>
+              <option value="Razer 5$ Gold" data-price="65.0">Razer 5$ - 65.0 دينار</option>
+              <option value="Razer 10$ Gold" data-price="130.0">Razer 10$ - 130.0 دينار</option>
+              <option value="Razer 20$ Gold" data-price="260.0">Razer 20$ - 260.0 دينار</option>
+            </select>
+          </div>
+        </div>
+        <button onclick="openModal('Razer Gold', 'razer-offers', false)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب الآن</button>
+      </div>
+
+      <!-- آيتونز تركي -->
+      <div class="card-bg rounded-2xl p-6 border border-gray-800 hover:border-orange-500 transition-all shadow-lg flex flex-col justify-between">
+        <div>
+          <h3 class="text-xl font-extrabold text-orange-500 mb-2">iTunes & App Store (TR)</h3>
+          <p class="text-gray-400 text-sm mb-4">بطاقات آيتونز متجر تركي TL</p>
+          <div class="space-y-2 mb-6">
+            <label class="block text-xs font-bold text-gray-300">اختر العرض:</label>
+            <select id="itunes-tr" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
+              <option value="iTunes 25 TL" data-price="10.0">25 TL - 10.0 دينار</option>
+              <option value="iTunes 50 TL" data-price="19.0">50 TL - 19.0 دينار</option>
+              <option value="iTunes 100 TL" data-price="37.0">100 TL - 37.0 دينار</option>
+              <option value="iTunes 250 TL" data-price="90.0">250 TL - 90.0 دينار</option>
+            </select>
+          </div>
+        </div>
+        <button onclick="openModal('iTunes TR', 'itunes-tr', false)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب الآن</button>
       </div>
 
     </div>
@@ -59,9 +144,7 @@
   <!-- Modal نافذة الطلب -->
   <div id="orderModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
     <div class="modal-bg w-full max-w-md rounded-2xl p-6 border border-gray-800 shadow-2xl relative">
-      
       <button onclick="closeModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white font-bold text-lg">✕</button>
-      
       <h3 id="modalTitle" class="text-lg font-bold text-orange-500 mb-4 text-center"></h3>
 
       <div class="space-y-4">
@@ -70,24 +153,23 @@
           <p><span class="text-gray-400">السعر:</span> <span id="modalPrice" class="font-bold text-orange-400"></span> دينار</p>
         </div>
 
-        <div>
-          <label class="block text-xs font-bold text-gray-300 mb-1">معرّف الحساب (Player ID / Username):</label>
+        <div id="id-field-container">
+          <label id="id-label" class="block text-xs font-bold text-gray-300 mb-1">معرّف الحساب (Player ID):</label>
           <input type="text" id="player-id" placeholder="أدخل ID حسابك هنا" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
         </div>
 
         <div>
           <label class="block text-xs font-bold text-gray-300 mb-1">طريقة الدفع:</label>
-          <select id="payment-method" onchange="updatePaymentDetails()" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
-            <option value="تحويل رصيد">تحويل رصيد ليبيانا / مدار</option>
+          <select id="payment-method" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
+            <option value="تحويل رصيد ليبيانا">تحويل رصيد ليبيانا</option>
             <option value="كارت شحن ليبيانا">كارت شحن ليبيانا</option>
-            <option value="كارت شحن مدار">كارت شحن مدار</option>
-            <option value="سداد">خدمة سداد / تداول</option>
+            <option value="سداد">سداد / تداول</option>
           </select>
         </div>
 
-        <div id="payment-info-box" class="bg-orange-950/30 border border-orange-500/30 p-3 rounded-lg text-xs text-orange-300">
-          <p class="font-bold mb-1">رقم التحويل: <span class="text-white select-all">0913147002</span></p>
-          <p>قم بالتحويل إلى هذا الرقم ثم أدخل رقم هاتفك أدناه للتحقق.</p>
+        <div class="bg-orange-950/30 border border-orange-500/30 p-3 rounded-lg text-xs text-orange-300">
+          <p class="font-bold mb-1">رقم التحويل الرسمي: <span class="text-white select-all font-mono">0913147002</span></p>
+          <p>قم بالتحويل للقيمة المطلوبة ثم اضغط تأكيد الطلب.</p>
         </div>
 
         <div>
@@ -95,10 +177,8 @@
           <input type="tel" id="customer-phone" placeholder="09XXXXXXXX" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
         </div>
 
-        <!-- أزرار الإجراءات -->
         <button onclick="submitOrder()" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md mt-2">تأكيد إرسال الطلب</button>
         
-        <!-- زر الواتساب -->
         <a href="https://wa.me/218913147002" target="_blank" class="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition-all shadow-md">
           <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
           <span>تواصل معنا عبر واتساب</span>
@@ -115,19 +195,29 @@
     let selectedGame = '';
     let selectedOffer = '';
     let selectedPrice = 0;
+    let requiresId = true;
 
-    function openModal(gameName, selectId) {
+    function openModal(gameName, selectId, needsId) {
       const select = document.getElementById(selectId);
       const selectedOption = select.options[select.selectedIndex];
-      
       selectedGame = gameName;
       selectedOffer = selectedOption.value;
       selectedPrice = selectedOption.getAttribute('data-price');
+      requiresId = needsId;
 
-      document.getElementById('modalTitle').innerText = `إتمام الطلب: ${gameName}`;
+      document.getElementById('modalTitle').innerText = `إتمام طلب: ${gameName}`;
       document.getElementById('modalOffer').innerText = selectedOffer;
       document.getElementById('modalPrice').innerText = selectedPrice;
       
+      const idContainer = document.getElementById('id-field-container');
+      if (requiresId) {
+        idContainer.style.display = 'block';
+        document.getElementById('player-id').placeholder = 'أدخل ID حسابك هنا';
+      } else {
+        idContainer.style.display = 'block';
+        document.getElementById('player-id').placeholder = 'ملاحظة أو البريد (اختياري)';
+      }
+
       document.getElementById('orderModal').classList.remove('hidden');
     }
 
@@ -135,28 +225,23 @@
       document.getElementById('orderModal').classList.add('hidden');
     }
 
-    function updatePaymentDetails() {
-      const method = document.getElementById('payment-method').value;
-      const box = document.getElementById('payment-info-box');
-      if (method.includes('كارت')) {
-        box.innerHTML = `<p class="font-bold mb-1">إرسال كروت الشحن:</p><p>يرجى إرسال رقم كارت الشحن عبر الواتساب مباشرة مع رقم الطلب.</p>`;
-      } else {
-        box.innerHTML = `<p class="font-bold mb-1">رقم التحويل: <span class="text-white select-all">0913147002</span></p><p>قم بالتحويل إلى هذا الرقم ثم أدخل رقم هاتفك أدناه للتحقق.</p>`;
-      }
-    }
-
     async function submitOrder() {
       const phone = document.getElementById('customer-phone').value.trim();
       const playerId = document.getElementById('player-id').value.trim();
       const paymentMethod = document.getElementById('payment-method').value;
 
-      if (!phone || !playerId) {
-        alert('الرجاء تعبئة جميع الحقول المطلوبة (ID ورقم الهاتف)');
+      if (!phone) {
+        alert('الرجاء إدخال رقم الهاتف للتواصل');
+        return;
+      }
+
+      if (requiresId && !playerId) {
+        alert('الرجاء إدخال معرف الحساب (Player ID)');
         return;
       }
 
       const orderData = {
-        customer_name: `معرّف الحساب: ${playerId}`,
+        customer_name: requiresId ? `معرّف الحساب: ${playerId}` : `بطاقات رقمية (ملاحظة: ${playerId || 'بدون'})`,
         phone: phone,
         address: `طريقة الدفع: ${paymentMethod}`,
         cart: [{ game: selectedGame, offer: selectedOffer, price: selectedPrice }],
@@ -169,7 +254,6 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(orderData)
         });
-
         const result = await response.json();
 
         if (response.ok && result.success) {
@@ -179,7 +263,7 @@
           alert(`خطأ: ${result.error || 'فشل إرسال الطلب'}`);
         }
       } catch (error) {
-        alert(`خطأ في الاتصال بالسيرفر: ${error.message}`);
+        alert(`خطأ في الاتصال: ${error.message}`);
       }
     }
   </script>
