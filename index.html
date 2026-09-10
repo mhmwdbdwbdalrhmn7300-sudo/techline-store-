@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech Line | تك لاين</title>
+  <title>TECH LINE</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
   <style>
@@ -14,210 +14,199 @@
     .modal-bg { background-color: #1e1e1e; }
   </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between" onload="trackVisit()">
+<body class="min-h-screen flex flex-col justify-between">
 
   <!-- الهيدر -->
   <header class="card-bg border-b border-gray-800 p-4 sticky top-0 z-40">
     <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-2xl font-extrabold text-orange-500 tracking-wider">TECH LINE</h1>
+      <h1 class="text-xl font-extrabold text-orange-500 tracking-wider">TECH LINE</h1>
       <div class="flex items-center gap-2">
-        <a href="#support-section" class="bg-zinc-800 hover:bg-zinc-700 text-white px-3 py-1.5 rounded-lg text-sm font-bold transition-all">الدعم الفني</a>
-        <a href="https://wa.me/218944235295" target="_blank" class="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg text-sm font-bold transition-all">واتساب</a>
+        <a href="https://wa.me/218944235295" target="_blank" class="bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-all">واتساب</a>
+        <a href="#support-section" class="bg-zinc-800 hover:bg-zinc-700 text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-all">الدعم الفني</a>
       </div>
     </div>
   </header>
 
-  <!-- شريط الرسائل والتنبيهات الإدارية -->
-  <div id="admin-notice-bar" class="hidden bg-orange-600 text-white text-center py-2 px-4 text-sm font-bold">
-    <span id="notice-text"></span>
-  </div>
-
   <!-- المحتوى الرئيسي -->
-  <main class="container mx-auto px-4 py-8 space-y-10">
-    <div>
-      <h2 class="text-xl font-bold mb-6 text-center text-gray-200">اختر البطاقة المطلوبة للشحن</h2>
+  <main class="container mx-auto px-4 py-6 space-y-6 max-w-xl">
 
-      <!-- بطاقات الخدمات -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        
-        <!-- بطاقات آيتونز (iTunes) -->
-        <div class="card-bg rounded-2xl p-6 border border-gray-800 hover:border-orange-500 transition-all shadow-lg flex flex-col justify-between">
-          <div>
-            <h3 class="text-xl font-extrabold text-orange-500 mb-2">iTunes Gift Cards</h3>
-            <p class="text-gray-400 text-sm mb-4">بطاقات آيتونز (يصلك الكود مباشرة)</p>
-            <div class="space-y-2 mb-6">
-              <label class="block text-xs font-bold text-gray-300">اختر الباقة:</label>
-              <select id="itunes-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
-                <option value="iTunes 2$" data-price="27.000">iTunes 2$ - 27.000 دينار</option>
-                <option value="iTunes 3$" data-price="40.500">iTunes 3$ - 40.500 دينار</option>
-                <option value="iTunes 4$" data-price="54.000">iTunes 4$ - 54.000 دينار</option>
-                <option value="iTunes 5$" data-price="67.500">iTunes 5$ - 67.500 دينار</option>
-                <option value="iTunes 10$" data-price="135.000">iTunes 10$ - 135.000 دينار</option>
-                <option value="iTunes 15$" data-price="202.500">iTunes 15$ - 202.500 دينار</option>
-                <option value="iTunes 20$" data-price="270.000">iTunes 20$ - 270.000 دينار</option>
-                <option value="iTunes 25$" data-price="337.500">iTunes 25$ - 337.500 دينار</option>
-              </select>
-            </div>
-          </div>
-          <button onclick="openModal('iTunes Gift Cards', 'itunes-offers', true)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب كود</button>
-        </div>
-
-        <!-- بلايستيشن أمريكي (PSN USA) -->
-        <div class="card-bg rounded-2xl p-6 border border-gray-800 hover:border-orange-500 transition-all shadow-lg flex flex-col justify-between">
-          <div>
-            <h3 class="text-xl font-extrabold text-orange-500 mb-2">PlayStation Network USA</h3>
-            <p class="text-gray-400 text-sm mb-4">بطاقات ستور أمريكي (أكواد رقمية)</p>
-            <div class="space-y-2 mb-6">
-              <label class="block text-xs font-bold text-gray-300">اختر الباقة:</label>
-              <select id="psn-usa-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
-                <option value="PSN 10$" data-price="130.150">PSN 10$ - 130.150 دينار</option>
-                <option value="PSN 25$" data-price="325.350">PSN 25$ - 325.350 دينار</option>
-              </select>
-            </div>
-          </div>
-          <button onclick="openModal('PlayStation Network USA', 'psn-usa-offers', true)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب كود</button>
-        </div>
-
-        <!-- بلايستيشن إماراتي (PSN UAE) -->
-        <div class="card-bg rounded-2xl p-6 border border-gray-800 hover:border-orange-500 transition-all shadow-lg flex flex-col justify-between">
-          <div>
-            <h3 class="text-xl font-extrabold text-orange-500 mb-2">PlayStation Network UAE</h3>
-            <p class="text-gray-400 text-sm mb-4">بطاقات ستور إماراتي (أكواد رقمية)</p>
-            <div class="space-y-2 mb-6">
-              <label class="block text-xs font-bold text-gray-300">اختر الباقة:</label>
-              <select id="psn-uae-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
-                <option value="PSN - UAE $10" data-price="132.250">PSN - UAE $10 - 132.250 دينار</option>
-                <option value="PSN - UAE $20" data-price="264.500">PSN - UAE $20 - 264.500 دينار</option>
-              </select>
-            </div>
-          </div>
-          <button onclick="openModal('PlayStation Network UAE', 'psn-uae-offers', true)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب كود</button>
-        </div>
-
-        <!-- ريزر غولد (Razer Gold) -->
-        <div class="card-bg rounded-2xl p-6 border border-gray-800 hover:border-orange-500 transition-all shadow-lg flex flex-col justify-between">
-          <div>
-            <h3 class="text-xl font-extrabold text-orange-500 mb-2">Razer Gold</h3>
-            <p class="text-gray-400 text-sm mb-4">شحن ريزر غولد (أكواد رقمية)</p>
-            <div class="space-y-2 mb-6">
-              <label class="block text-xs font-bold text-gray-300">اختر الباقة:</label>
-              <select id="razer-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
-                <option value="Razer 1$ Gold" data-price="13.400">Razer 1$ Gold - 13.400 دينار</option>
-                <option value="Razer 2$ Gold" data-price="26.700">Razer 2$ Gold - 26.700 دينار</option>
-                <option value="Razer 5$ Gold" data-price="66.850">Razer 5$ Gold - 66.850 دينار</option>
-                <option value="Razer 10$ Gold" data-price="133.700">Razer 10$ Gold - 133.700 دينار</option>
-                <option value="Razer 20$ Gold" data-price="267.400">Razer 20$ Gold - 267.400 دينار</option>
-              </select>
-            </div>
-          </div>
-          <button onclick="openModal('Razer Gold', 'razer-offers', true)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب كود</button>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- قسم تتبع الطلب واستلام الكود -->
-    <div class="card-bg rounded-2xl p-6 border border-gray-800 max-w-xl mx-auto shadow-xl">
-      <h3 class="text-lg font-bold text-orange-500 mb-2 text-center">استعلم عن طلبك أو كودك</h3>
-      <p class="text-xs text-gray-400 mb-4 text-center">أدخل رقم هاتفك الذي استخدمته في الطلب لمعرفة حالة طلبك واستلام الكود الرقمي:</p>
-      <div class="flex gap-2">
-        <input type="text" id="track-phone" placeholder="أدخل رقم هاتفك (09XXXXXXXX)" class="flex-1 bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
-        <button onclick="checkOrderStatus()" class="bg-zinc-800 hover:bg-zinc-700 text-white font-bold px-5 py-3 rounded-lg text-sm">بحث</button>
-      </div>
-      <div id="track-result" class="mt-4 hidden space-y-3"></div>
-    </div>
-
-    <!-- قسم الدعم الفني والبلاغات -->
-    <div id="support-section" class="card-bg rounded-2xl p-6 border border-gray-800 max-w-xl mx-auto shadow-xl">
-      <h3 class="text-lg font-bold text-orange-500 mb-2 text-center">الدعم الفني والشكاوى</h3>
-      <p class="text-xs text-gray-400 mb-4 text-center">واجهتك مشكلة أو تريد الاستفسار؟ أرسل بلاغك وسنرد عليك قريباً:</p>
+    <!-- 1. ببجي موبايل (PUBG UC) -->
+    <div class="card-bg rounded-2xl p-5 border border-gray-800 shadow-lg">
+      <h3 class="text-lg font-extrabold text-orange-500 mb-1">ببجي موبايل (PUBG UC)</h3>
+      <p class="text-gray-400 text-xs mb-4">شحن شدات ببجي الرسمية بالمعرف (ID) - شحن فوري</p>
       <div class="space-y-3">
-        <input type="text" id="ticket-name" placeholder="اسمك الكريم" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
-        <input type="tel" id="ticket-phone" placeholder="رقم هاتفك للتواصل" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
-        <textarea id="ticket-message" placeholder="اكتب تفاصيل المشكلة أو البلاغ هنا..." rows="3" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500"></textarea>
-        <button onclick="sendTicket()" class="w-full bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-3 rounded-lg text-sm transition-all">إرسال البلاغ</button>
+        <label class="block text-xs font-bold text-gray-300">اختر العرض:</label>
+        <select id="pubg-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
+          <option value="60 UC" data-price="13.5">60 UC - 13.5 دينار</option>
+          <option value="325 UC" data-price="65.0">325 UC - 65.0 دينار</option>
+          <option value="660 UC" data-price="130.0">660 UC - 130.0 دينار</option>
+        </select>
+        <button onclick="openModal('ببجي موبايل (PUBG UC)', 'pubg-offers', false)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md text-sm">طلب الآن</button>
       </div>
     </div>
+
+    <!-- 2. فري فاير (Free Fire) -->
+    <div class="card-bg rounded-2xl p-5 border border-gray-800 shadow-lg">
+      <h3 class="text-lg font-extrabold text-orange-500 mb-1">فري فاير (Free Fire)</h3>
+      <p class="text-gray-400 text-xs mb-4">شحن جوهر فري فاير بالمعرف (ID) - شحن فوري</p>
+      <div class="space-y-3">
+        <label class="block text-xs font-bold text-gray-300">اختر العرض:</label>
+        <select id="ff-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
+          <option value="110 Diamonds" data-price="15.0">110 Diamonds - 15.0 دينار</option>
+          <option value="341 Diamonds" data-price="45.0">341 Diamonds - 45.0 دينار</option>
+          <option value="1050 Diamonds" data-price="135.0">1050 Diamonds - 135.0 دينار</option>
+        </select>
+        <button onclick="openModal('فري فاير (Free Fire)', 'ff-offers', false)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md text-sm">طلب الآن</button>
+      </div>
+    </div>
+
+    <!-- 3. آيتونز (iTunes Gift Cards) - الأكواد الجديدة -->
+    <div class="card-bg rounded-2xl p-5 border border-gray-800 shadow-lg">
+      <h3 class="text-lg font-extrabold text-orange-500 mb-1">iTunes Gift Cards</h3>
+      <p class="text-gray-400 text-xs mb-4">بطاقات آيتونز رسمية (يصلك الكود مباشرة)</p>
+      <div class="space-y-3">
+        <label class="block text-xs font-bold text-gray-300">اختر الباقة:</label>
+        <select id="itunes-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
+          <option value="iTunes 2$" data-price="27.000">iTunes 2$ - 27.000 دينار</option>
+          <option value="iTunes 3$" data-price="40.500">iTunes 3$ - 40.500 دينار</option>
+          <option value="iTunes 4$" data-price="54.000">iTunes 4$ - 54.000 دينار</option>
+          <option value="iTunes 5$" data-price="67.500">iTunes 5$ - 67.500 دينار</option>
+          <option value="iTunes 10$" data-price="135.000">iTunes 10$ - 135.000 دينار</option>
+          <option value="iTunes 15$" data-price="202.500">iTunes 15$ - 202.500 دينار</option>
+          <option value="iTunes 20$" data-price="270.000">iTunes 20$ - 270.000 دينار</option>
+          <option value="iTunes 25$" data-price="337.500">iTunes 25$ - 337.500 دينار</option>
+        </select>
+        <button onclick="openModal('iTunes Gift Cards', 'itunes-offers', true)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md text-sm">طلب كود</button>
+      </div>
+    </div>
+
+    <!-- 4. بلايستيشن أمريكي (PSN USA) -->
+    <div class="card-bg rounded-2xl p-5 border border-gray-800 shadow-lg">
+      <h3 class="text-lg font-extrabold text-orange-500 mb-1">PlayStation Network USA</h3>
+      <p class="text-gray-400 text-xs mb-4">بطاقات ستور أمريكي (أكواد رقمية)</p>
+      <div class="space-y-3">
+        <label class="block text-xs font-bold text-gray-300">اختر الباقة:</label>
+        <select id="psn-usa-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
+          <option value="PSN 10$" data-price="130.150">PSN 10$ - 130.150 دينار</option>
+          <option value="PSN 25$" data-price="325.350">PSN 25$ - 325.350 دينار</option>
+        </select>
+        <button onclick="openModal('PlayStation Network USA', 'psn-usa-offers', true)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md text-sm">طلب كود</button>
+      </div>
+    </div>
+
+    <!-- 5. بلايستيشن إماراتي (PSN UAE) -->
+    <div class="card-bg rounded-2xl p-5 border border-gray-800 shadow-lg">
+      <h3 class="text-lg font-extrabold text-orange-500 mb-1">PlayStation Network UAE</h3>
+      <p class="text-gray-400 text-xs mb-4">بطاقات ستور إماراتي (أكواد رقمية)</p>
+      <div class="space-y-3">
+        <label class="block text-xs font-bold text-gray-300">اختر الباقة:</label>
+        <select id="psn-uae-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
+          <option value="PSN - UAE $10" data-price="132.250">PSN - UAE $10 - 132.250 دينار</option>
+          <option value="PSN - UAE $20" data-price="264.500">PSN - UAE $20 - 264.500 دينار</option>
+        </select>
+        <button onclick="openModal('PlayStation Network UAE', 'psn-uae-offers', true)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md text-sm">طلب كود</button>
+      </div>
+    </div>
+
+    <!-- 6. ريزر غولد (Razer Gold) -->
+    <div class="card-bg rounded-2xl p-5 border border-gray-800 shadow-lg">
+      <h3 class="text-lg font-extrabold text-orange-500 mb-1">Razer Gold</h3>
+      <p class="text-gray-400 text-xs mb-4">شحن ريزر غولد (أكواد رقمية)</p>
+      <div class="space-y-3">
+        <label class="block text-xs font-bold text-gray-300">اختر الباقة:</label>
+        <select id="razer-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
+          <option value="Razer 1$ Gold" data-price="13.400">Razer 1$ Gold - 13.400 دينار</option>
+          <option value="Razer 2$ Gold" data-price="26.700">Razer 2$ Gold - 26.700 دينار</option>
+          <option value="Razer 5$ Gold" data-price="66.850">Razer 5$ Gold - 66.850 دينار</option>
+          <option value="Razer 10$ Gold" data-price="133.700">Razer 10$ Gold - 133.700 دينار</option>
+          <option value="Razer 20$ Gold" data-price="267.400">Razer 20$ Gold - 267.400 دينار</option>
+        </select>
+        <button onclick="openModal('Razer Gold', 'razer-offers', true)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md text-sm">طلب كود</button>
+      </div>
+    </div>
+
+    <!-- قسم الاستعلام عن الطلبات -->
+    <div class="card-bg rounded-2xl p-5 border border-gray-800 shadow-xl">
+      <h3 class="text-md font-bold text-orange-500 mb-2 text-center">الاستعلام عن حالة الطلب أو الكود</h3>
+      <div class="flex gap-2">
+        <input type="text" id="track-phone" placeholder="أدخل رقم هاتفك..." class="flex-1 bg-zinc-900 border border-gray-700 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-orange-500">
+        <button onclick="checkOrderStatus()" class="bg-zinc-800 hover:bg-zinc-700 text-white font-bold px-4 py-2.5 rounded-lg text-xs">بحث</button>
+      </div>
+      <div id="track-result" class="mt-3 hidden space-y-2"></div>
+    </div>
+
+    <!-- الدعم الفني -->
+    <div id="support-section" class="card-bg rounded-2xl p-5 border border-gray-800 shadow-xl">
+      <h3 class="text-md font-bold text-orange-500 mb-2 text-center">الدعم الفني</h3>
+      <div class="space-y-2.5">
+        <input type="text" id="ticket-name" placeholder="اسمك الكريم" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-orange-500">
+        <input type="tel" id="ticket-phone" placeholder="رقم هاتفك" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-orange-500">
+        <textarea id="ticket-message" placeholder="اكتب مشكلتك..." rows="2" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-orange-500"></textarea>
+        <button onclick="sendTicket()" class="w-full bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-2.5 rounded-lg text-xs">إرسال البلاغ</button>
+      </div>
+    </div>
+
   </main>
 
-  <!-- Modal نافذة الطلب -->
+  <!-- نافذة الطلب (Modal) -->
   <div id="orderModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
-    <div class="modal-bg w-full max-w-md rounded-2xl p-6 border border-gray-800 shadow-2xl relative">
-      <button onclick="closeModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white font-bold text-lg">✕</button>
-      <h3 id="modalTitle" class="text-lg font-bold text-orange-500 mb-4 text-center"></h3>
+    <div class="modal-bg w-full max-w-sm rounded-2xl p-5 border border-gray-800 shadow-2xl relative">
+      <button onclick="closeModal()" class="absolute top-3 left-3 text-gray-400 hover:text-white font-bold">✕</button>
+      <h3 id="modalTitle" class="text-md font-bold text-orange-500 mb-3 text-center"></h3>
 
-      <div class="space-y-4">
-        <div class="bg-zinc-900 p-3 rounded-lg border border-gray-800 text-sm">
+      <div class="space-y-3 text-xs">
+        <div class="bg-zinc-900 p-2.5 rounded-lg border border-gray-800">
           <p><span class="text-gray-400">العرض:</span> <span id="modalOffer" class="font-bold text-white"></span></p>
-          <p><span class="text-gray-400">السعر الصافي:</span> <span id="modalPrice" class="font-bold text-orange-400"></span> دينار</p>
-        </div>
-
-        <div id="input-field-container">
-          <label id="input-label" class="block text-xs font-bold text-gray-300 mb-1">ملاحظة أو البريد (اختياري):</label>
-          <input type="text" id="target-input" placeholder="اختياري لاستلام الكود" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
+          <p><span class="text-gray-400">السعر:</span> <span id="modalPrice" class="font-bold text-orange-400"></span> دينار</p>
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-gray-300 mb-1">طريقة الدفع عبر ليبيانا:</label>
-          <select id="payment-method-type" onchange="togglePaymentInput()" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500 mb-2">
-            <option value="تحويل رصيد ليبيانا">تحويل رصيد ليبيانا المباشر</option>
-            <option value="كارت شحن ليبيانا">إرسال رقم كارت شحن ليبيانا</option>
+          <label id="target-label" class="block font-bold text-gray-300 mb-1">الآيدي (ID) أو ملاحظة الاستلام:</label>
+          <input type="text" id="target-id" placeholder="أدخل الـ ID أو البريد هنا" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-orange-500">
+        </div>
+
+        <div>
+          <label class="block font-bold text-gray-300 mb-1">طريقة الدفع عبر ليبيانا:</label>
+          <select id="payment-method-type" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-orange-500 mb-1.5">
+            <option value="تحويل رصيد ليبيانا">تحويل رصيد مباشر</option>
+            <option value="كارت شحن ليبيانا">كارت شحن ليبيانا</option>
           </select>
-          <input type="text" id="payment-details" placeholder="أدخل رقم الهاتف الذي حولت منه الرصيد" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
+          <input type="text" id="payment-details" placeholder="رقم الهاتف المحول منه أو رقم الكارت" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-orange-500">
         </div>
 
-        <div class="bg-orange-950/30 border border-orange-500/30 p-3 rounded-lg text-xs text-orange-300">
-          <p class="font-bold mb-1">رقم التحويل أو الشحن الرسمي: <span class="text-white select-all font-mono">0944235295</span></p>
-          <p>قم بتحويل القيمة المطلوبة أو إرسال الكارت ثم أكد الطلب.</p>
+        <div class="bg-orange-950/30 border border-orange-500/30 p-2.5 rounded-lg text-[11px] text-orange-300">
+          <p class="font-bold">رقم التحويل الرسمي: <span class="text-white select-all font-mono">0944235295</span></p>
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-gray-300 mb-1">رقم الهاتف للتواصل:</label>
-          <input type="tel" id="customer-phone" placeholder="09XXXXXXXX" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
+          <label class="block font-bold text-gray-300 mb-1">رقم هاتفك للتواصل واستلام الكود:</label>
+          <input type="tel" id="customer-phone" placeholder="09XXXXXXXX" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-orange-500">
         </div>
 
-        <button onclick="submitOrder()" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md mt-2">تأكيد إرسال الطلب</button>
+        <button onclick="submitOrder()" class="w-full accent-bg text-white font-bold py-2.5 rounded-xl shadow-md mt-1">تأكيد الطلب</button>
       </div>
     </div>
   </div>
 
-  <!-- Modal رسالة النجاح -->
+  <!-- نافذة النجاح -->
   <div id="successModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
-    <div class="modal-bg w-full max-w-md rounded-2xl p-6 border border-gray-800 shadow-2xl text-center space-y-4">
-      <h3 class="text-xl font-bold text-green-500">تم إرسال طلبك بنجاح!</h3>
-      <p class="text-sm text-gray-300">رقم طلبك: <span id="res-order-id" class="font-bold text-orange-400"></span></p>
-      <p class="text-xs text-gray-400">احتفظ برقم هاتفك للبحث عن طلبك واستلام الكود فور مراجعته على الرقم 0944235295.</p>
-      <button onclick="location.reload()" class="w-full bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-2.5 rounded-xl">إغلاق</button>
+    <div class="modal-bg w-full max-w-sm rounded-2xl p-5 border border-gray-800 shadow-2xl text-center space-y-3 text-xs">
+      <h3 class="text-lg font-bold text-green-500">تم إرسال طلبك بنجاح!</h3>
+      <p class="text-gray-300">رقم طلبك: <span id="res-order-id" class="font-bold text-orange-400"></span></p>
+      <p class="text-[11px] text-gray-400">سيتم إرسال الكود الرقمي لك أو معالجة طلبك عبر رقم هاتفك.</p>
+      <button onclick="location.reload()" class="w-full bg-zinc-800 text-white font-bold py-2 rounded-xl">إغلاق</button>
     </div>
   </div>
 
-  <footer class="text-center p-4 text-xs text-gray-600 border-t border-gray-800">
-    Tech Line Store &copy; 2026 - جميع الحقوق محفوظة
+  <footer class="text-center p-4 text-[10px] text-gray-600 border-t border-gray-800">
+    Tech Line Store &copy; 2026
   </footer>
 
   <script>
     let selectedGame = '';
     let selectedOffer = '';
     let selectedPrice = 0;
-    let isCodeProduct = false;
-
-    async function trackVisit() {
-      try {
-        await fetch('/.netlify/functions/orders?action=visit', { method: 'POST' });
-        loadNotice();
-      } catch (e) {}
-    }
-
-    async function loadNotice() {
-      try {
-        const res = await fetch('/.netlify/functions/orders?action=get_notice');
-        const data = await res.json();
-        if (data && data.notice) {
-          document.getElementById('notice-text').innerText = data.notice;
-          document.getElementById('admin-notice-bar').classList.remove('hidden');
-        }
-      } catch (e) {}
-    }
+    let isCodeType = false;
 
     function openModal(gameName, selectId, isCode) {
       const select = document.getElementById(selectId);
@@ -225,17 +214,21 @@
       selectedGame = gameName;
       selectedOffer = selectedOption.value;
       selectedPrice = selectedOption.getAttribute('data-price');
-      isCodeProduct = isCode;
+      isCodeType = isCode;
 
-      document.getElementById('modalTitle').innerText = `إتمام طلب: ${gameName}`;
+      document.getElementById('modalTitle').innerText = `طلب: ${gameName}`;
       document.getElementById('modalOffer').innerText = selectedOffer;
       document.getElementById('modalPrice').innerText = selectedPrice;
       
-      const label = document.getElementById('input-label');
-      const input = document.getElementById('target-input');
-      
-      label.innerText = 'ملاحظة أو البريد لاستلام الكود (اختياري):';
-      input.placeholder = 'اختياري';
+      const targetLabel = document.getElementById('target-label');
+      const targetInput = document.getElementById('target-id');
+      if (isCode) {
+        targetLabel.innerText = 'ملاحظة أو البريد (اختياري لاستلام الكود):';
+        targetInput.placeholder = 'اختياري';
+      } else {
+        targetLabel.innerText = 'معرف اللاعب (ID) أو الحساب:</label>';
+        targetInput.placeholder = 'أدخل الـ ID الخاص بك هنا';
+      }
 
       document.getElementById('orderModal').classList.remove('hidden');
     }
@@ -244,34 +237,24 @@
       document.getElementById('orderModal').classList.add('hidden');
     }
 
-    function togglePaymentInput() {
-      const type = document.getElementById('payment-method-type').value;
-      const details = document.getElementById('payment-details');
-      if (type === 'كارت شحن ليبيانا') {
-        details.placeholder = 'أدخل أرقام كارت الشحن هنا';
-      } else {
-        details.placeholder = 'أدخل رقم الهاتف الذي حولت منه الرصيد';
-      }
-    }
-
     async function submitOrder() {
       const phone = document.getElementById('customer-phone').value.trim();
-      const targetInput = document.getElementById('target-input').value.trim();
+      const targetId = document.getElementById('target-id').value.trim();
       const paymentType = document.getElementById('payment-method-type').value;
       const paymentDetails = document.getElementById('payment-details').value.trim();
 
       if (!phone || !paymentDetails) {
-        alert('الرجاء إدخال رقم هاتفك وتفاصيل الدفع (الرقم المحول منه أو الكارت)');
+        alert('الرجاء إدخال رقم هاتفك وتفاصيل الدفع (رقم المحول منه أو الكارت)');
         return;
       }
 
       const orderData = {
-        customer_name: `طلب كود (ملاحظة: ${targetInput || 'لا يوجد'})`,
+        customer_name: `البيانات: ${targetId || 'بدون'}`,
         phone: phone,
         address: `${paymentType}: ${paymentDetails}`,
         cart: [{ game: selectedGame, offer: selectedOffer, price: selectedPrice }],
         total_price: parseFloat(selectedPrice),
-        admin_code: 'قيد المراجعة...'
+        admin_code: 'قيد المراجعة والتحويل...'
       };
 
       try {
@@ -287,7 +270,7 @@
           document.getElementById('res-order-id').innerText = `#${result.order.id}`;
           document.getElementById('successModal').classList.remove('hidden');
         } else {
-          alert('فشل إرسال الطلب، تأكد من البيانات');
+          alert('فشل إرسال الطلب');
         }
       } catch (error) {
         alert('خطأ في الاتصال بالسيرفر');
@@ -297,10 +280,7 @@
     async function checkOrderStatus() {
       const phone = document.getElementById('track-phone').value.trim();
       const resBox = document.getElementById('track-result');
-      if (!phone) {
-        alert('أدخل رقم الهاتف للبحث');
-        return;
-      }
+      if (!phone) return;
 
       try {
         const response = await fetch('/.netlify/functions/orders');
@@ -309,7 +289,7 @@
 
         resBox.classList.remove('hidden');
         if (userOrders.length === 0) {
-          resBox.innerHTML = `<p class="text-xs text-red-400 text-center">لا توجد طلبات مسجلة بهذا الرقم.</p>`;
+          resBox.innerHTML = `<p class="text-[11px] text-red-400 text-center">لا توجد طلبات مسجلة بهذا الرقم.</p>`;
           return;
         }
 
@@ -317,47 +297,39 @@
         userOrders.reverse().forEach(o => {
           const item = o.cart && o.cart[0] ? o.cart[0] : { game: '', offer: '' };
           html += `
-            <div class="bg-zinc-900 border border-gray-700 p-3 rounded-xl text-xs space-y-1">
-              <p class="text-orange-400 font-bold">طلب رقم #${o.id} - ${item.game} (${item.offer})</p>
+            <div class="bg-zinc-900 border border-gray-700 p-2.5 rounded-lg text-[11px] space-y-1">
+              <p class="text-orange-400 font-bold">طلب #${o.id} - ${item.game} (${item.offer})</p>
               <p class="text-gray-300">طريقة الدفع: ${o.address}</p>
-              <div class="mt-2 bg-black/40 p-2 rounded border border-orange-500/30">
-                <span class="text-gray-400">الكود الرقمي:</span>
-                <p class="text-white font-mono font-bold select-all mt-1">${o.admin_code || 'قيد المراجعة من الأدمن...'}</p>
+              <div class="bg-black/40 p-1.5 rounded mt-1 border border-orange-500/30">
+                <span class="text-gray-400">الكود أو الحالة:</span>
+                <p class="text-white font-mono font-bold select-all">${o.admin_code}</p>
               </div>
             </div>
           `;
         });
         resBox.innerHTML = html;
-      } catch (e) {
-        alert('حدث خطأ أثناء البحث');
-      }
+      } catch (e) {}
     }
 
     async function sendTicket() {
       const name = document.getElementById('ticket-name').value.trim();
       const phone = document.getElementById('ticket-phone').value.trim();
       const message = document.getElementById('ticket-message').value.trim();
-
       if (!name || !phone || !message) {
-        alert('الرجاء إبداء جميع الحقول للبلاغ');
+        alert('الرجاء إكمال جميع حقول البلاغ');
         return;
       }
-
       try {
-        const res = await fetch('/.netlify/functions/orders', {
+        await fetch('/.netlify/functions/orders', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ action: 'ticket', name, phone, message })
         });
-        if (res.ok) {
-          alert('تم إرسال بلاغك بنجاح وسنراجعه قريباً!');
-          document.getElementById('ticket-name').value = '';
-          document.getElementById('ticket-phone').value = '';
-          document.getElementById('ticket-message').value = '';
-        }
-      } catch (e) {
-        alert('خطأ في إرسال البلاغ');
-      }
+        alert('تم إرسال بلاغك بنجاح وسنرد عليك قريباً!');
+        document.getElementById('ticket-name').value = '';
+        document.getElementById('ticket-phone').value = '';
+        document.getElementById('ticket-message').value = '';
+      } catch (e) {}
     }
   </script>
 </body>
