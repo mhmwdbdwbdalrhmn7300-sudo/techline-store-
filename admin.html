@@ -27,7 +27,6 @@
       <table class="w-full text-right border-collapse text-sm">
         <thead>
           <tr class="border-b border-gray-800 text-gray-400">
-            <p id="loading" class="text-center py-4 text-gray-400">جاري تحميل الطلبات...</p>
             <th class="p-3">رقم الطلب</th>
             <th class="p-3">البيانات / المعرّف</th>
             <th class="p-3">الخدمة والمنتج</th>
@@ -37,7 +36,7 @@
           </tr>
         </thead>
         <tbody id="orders-table-body">
-          <!-- سيتم تعبئة الطلبات تلقائياً هنا -->
+          <tr><td colspan="6" class="text-center py-6 text-gray-400" id="loading">جاري تحميل الطلبات...</td></tr>
         </tbody>
       </table>
     </div>
@@ -51,7 +50,7 @@
         const tbody = document.getElementById('orders-table-body');
         tbody.innerHTML = '';
 
-        if (orders.length === 0) {
+        if (!orders || orders.length === 0) {
           tbody.innerHTML = `<tr><td colspan="6" class="text-center py-6 text-gray-500">لا توجد طلبات جديدة حالياً.</td></tr>`;
           return;
         }
@@ -76,7 +75,7 @@
               <input type="text" id="code-${order.id}" value="${order.admin_code || ''}" placeholder="أدخل الكود هنا..." class="bg-zinc-900 border border-gray-700 text-white text-xs p-2 rounded-lg w-40 focus:outline-none focus:border-orange-500">
             </td>
             <td class="p-3 flex gap-2 items-center">
-              <button onclick="saveCode('${order.id}')" class="bg-orange-600 hover:bg-orange-700 text-white text-xs px-3 py-2 rounded-lg font-bold transition-all">حفظ الكود</button>
+              <button onclick="saveCode('${order.id}')" class="bg-orange-600 hover:bg-orange-700 text-white text-xs px-3 py-2 rounded-lg font-bold transition-all">حفظ</button>
               <button onclick="deleteOrder('${order.id}')" class="bg-red-900/40 hover:bg-red-900 text-red-300 text-xs px-2.5 py-2 rounded-lg transition-all">حذف</button>
             </td>
           `;
@@ -96,7 +95,7 @@
           body: JSON.stringify({ admin_code: codeInput })
         });
         if (response.ok) {
-          alert('تم حفظ الكود وإرساله بنجاح!');
+          alert('تم حفظ الكود بنجاح!');
           fetchOrders();
         } else {
           alert('فشل حفظ الكود');
@@ -122,7 +121,6 @@
       }
     }
 
-    // تحديث القائمة تلقائياً كل 10 ثوانٍ
     fetchOrders();
     setInterval(fetchOrders, 10000);
   </script>
