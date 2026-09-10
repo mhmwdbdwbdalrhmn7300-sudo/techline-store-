@@ -1,235 +1,187 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech Line | تك لاين</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Tajawal', sans-serif; background-color: #121212; color: #FFFFFF; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Line | تك لاين</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Tajawal', sans-serif; background-color: #121212; color: #e0e0e0; }
+    .accent-bg { background-color: #f97316; }
+    .accent-bg:hover { background-color: #ea580c; }
+    .accent-border { border-color: #f97316; }
+    .card-bg { background-color: #1e1e1e; }
+    .modal-bg { background-color: #1e1e1e; }
+  </style>
 </head>
-<body class="p-4 md:p-8">
-    <div class="max-w-4xl mx-auto space-y-8">
-        
-        <!-- Header -->
-        <header class="text-center space-y-2">
-            <h1 class="text-4xl font-bold text-[#FF6B00]">Tech Line تك لاين</h1>
-            <p class="text-gray-400">متجرك الأول لشحن الألعاب والتطبيقات عبر كروت ليبيانا</p>
-        </header>
+<body class="min-h-screen flex flex-col justify-between">
 
-        <!-- Track Order Section -->
-        <section class="bg-[#1E1E1E] p-6 rounded-[10px] border border-[#333] space-y-4">
-            <h2 class="text-xl font-bold text-center">📦 تتبع طلبك واستلام الكود</h2>
-            <p class="text-sm text-gray-400 text-center">أدخل رقم الطلب الخاص بك لمعرفة الحالة واستلام كود الشحن</p>
-            <div class="flex flex-col md:flex-row gap-3">
-                <input type="text" id="trackInput" placeholder="رقم الطلب (مثال: 1)" class="flex-1 p-3 rounded border border-[#444] bg-[#2A2A2A] text-white text-center focus:outline-none focus:border-[#FF6B00]">
-                <button onclick="trackOrder()" class="bg-[#FF6B00] text-white px-6 py-3 rounded font-bold hover:opacity-90 transition-opacity">🔍 تتبع</button>
-            </div>
-        </section>
+  <!-- الهيدر -->
+  <header class="card-bg border-b border-gray-800 p-4 sticky top-0 z-40">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-extrabold text-orange-500 tracking-wider">TECH LINE</h1>
+      <a href="https://wa.me/218913147002" target="_blank" class="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg text-sm font-bold transition-all">
+        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+        <span>واتساب</span>
+      </a>
+    </div>
+  </header>
 
-        <!-- Products Section -->
-        <section class="space-y-4">
-            <h2 class="text-2xl font-bold text-center">اختر الخدمة</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="productsGrid"></div>
-        </section>
+  <!-- المحتوى الرئيسي -->
+  <main class="container mx-auto px-4 py-8">
+    <h2 class="text-xl font-bold mb-6 text-center text-gray-200">اختر الخدمة المطلوبة</h2>
 
-        <!-- Offers Section -->
-        <section id="offersSection" class="hidden space-y-4">
-            <h2 id="offersTitle" class="text-xl font-bold text-center text-[#FF6B00]"></h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="offersGrid"></div>
-        </section>
-
-        <!-- Checkout Section -->
-        <section id="checkoutSection" class="hidden bg-[#1E1E1E] p-6 rounded-[10px] border border-[#333] space-y-4">
-            <h2 id="checkoutTitle" class="text-xl font-bold text-[#FF6B00]"></h2>
-            
-            <div id="offerSummary" class="bg-[#2A2A2A] p-4 rounded text-sm space-y-1 border border-[#444]"></div>
-
-            <form id="orderForm" onsubmit="submitOrder(event)" class="space-y-4">
-                <div>
-                    <label class="block text-sm mb-1">معرّف الحساب (Player ID / Username):</label>
-                    <input type="text" name="playerId" id="playerId" required class="w-full p-3 rounded border border-[#444] bg-[#2A2A2A] text-white focus:outline-none focus:border-[#FF6B00]">
-                </div>
-
-                <div>
-                    <label class="block text-sm mb-1">طريقة الدفع:</label>
-                    <select name="paymentMethod" id="paymentMethod" onchange="togglePaymentFields()" class="w-full p-3 rounded border border-[#444] bg-[#2A2A2A] text-white focus:outline-none focus:border-[#FF6B00]">
-                        <option value="libyana">كارت شحن ليبيانا</option>
-                        <option value="transfer">تحويل رصيد</option>
-                    </select>
-                </div>
-
-                <div id="libyanaField">
-                    <label class="block text-sm mb-1">رقم كارت الشحن (13 أو 14 رقم):</label>
-                    <input type="text" name="cardCode" id="cardCode" required class="w-full p-3 rounded border border-[#444] bg-[#2A2A2A] text-white focus:outline-none focus:border-[#FF6B00]">
-                </div>
-
-                <div id="transferField" class="hidden bg-[#2A2A2A] p-4 rounded border border-[#444] text-sm space-y-2">
-                    <p class="font-bold text-[#FF6B00]">رقم التحويل: 0944235295</p>
-                    <p>قم بالتحويل إلى هذا الرقم ثم أدخل رقم هاتفك أدناه</p>
-                </div>
-
-                <div>
-                    <label class="block text-sm mb-1">رقم الهاتف للتواصل:</label>
-                    <input type="text" name="phoneNumber" id="phoneNumber" required class="w-full p-3 rounded border border-[#444] bg-[#2A2A2A] text-white focus:outline-none focus:border-[#FF6B00]">
-                </div>
-
-                <button type="submit" id="submitBtn" class="w-full bg-[#FF6B00] text-white p-4 rounded font-bold hover:opacity-90 transition-opacity">تأكيد إرسال الطلب</button>
-            </form>
-        </section>
+    <!-- بطاقات الخدمات -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <!-- فري فاير -->
+      <div class="card-bg rounded-2xl p-6 border border-gray-800 hover:border-orange-500 transition-all shadow-lg flex flex-col justify-between">
+        <div>
+          <h3 class="text-xl font-extrabold text-orange-500 mb-2">فراي فاير (Free Fire)</h3>
+          <p class="text-gray-400 text-sm mb-4">شحن جوهر فري فاير فورياً بالمعرّف (ID)</p>
+          <div class="space-y-2 mb-6">
+            <label class="block text-xs font-bold text-gray-300">اختر العرض:</label>
+            <select id="ff-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
+              <option value="110 Diamonds" data-price="13.5">110 Diamonds - 13.5 دينار</option>
+              <option value="210 Diamonds" data-price="26.264">210 Diamonds - 26.264 دينار</option>
+              <option value="530 Diamonds" data-price="65.0">530 Diamonds - 65.0 دينار</option>
+              <option value="1080 Diamonds" data-price="130.0">1080 Diamonds - 130.0 دينار</option>
+            </select>
+          </div>
+        </div>
+        <button onclick="openModal('فراي فاير (Free Fire)', 'ff-offers')" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب الآن</button>
+      </div>
 
     </div>
+  </main>
 
-    <script>
-        const products = [
-            { id: 'pubg', name: 'ببجي موبايل (PUBG)', displayName: 'PUBG Mobile', description: 'شدات بوبجي', offers: [ { name: '60 UC', price: '12.333' }, { name: '325 UC', price: '61.649' }, { name: '660 UC', price: '123.336' }, { name: '1800 UC', price: '308.339' }, { name: '3850 UC', price: '616.674' }, { name: '8100 UC', price: '1233.355' } ] },
-            { id: 'freefire', name: 'فري فاير (Free Fire)', displayName: 'Free Fire', description: 'جواهر فري فاير', offers: [ { name: 'Diamonds 100', price: '13.132' }, { name: 'Diamonds 210', price: '26.264' }, { name: 'Diamonds 530', price: '65.660' }, { name: 'Diamonds 1080', price: '131.320' }, { name: 'Diamonds 2200', price: '262.640' } ] },
-            { id: 'itunes-us', name: 'بطاقة آيتونز أمريكي', displayName: 'iTunes US', description: 'بطاقات متجر أمريكي', offers: [ { name: 'iTunes 2$', price: '26.264' }, { name: 'iTunes 3$', price: '39.396' }, { name: 'iTunes 4$', price: '52.528' }, { name: 'iTunes 5$', price: '65.660' }, { name: 'iTunes 10$', price: '131.320' }, { name: 'iTunes 15$', price: '196.980' }, { name: 'iTunes 20$', price: '262.640' }, { name: 'iTunes 25$', price: '328.300' } ] },
-            { id: 'itunes-tr', name: 'بطاقة آيتونز تركي', displayName: 'iTunes TR', description: 'بطاقات متجر تركي', offers: [ { name: 'iTunes 25 TL', price: '8.554' }, { name: 'iTunes 50 TL', price: '17.107' }, { name: 'iTunes 100 TL', price: '34.215' }, { name: 'iTunes 250 TL', price: '85.538' }, { name: 'iTunes 1000 TL', price: '342.152' } ] },
-            { id: 'tiktok', name: 'عملات تيك توك', displayName: 'TikTok Coins', description: 'عملات وهدايا تيك توك', offers: [] }
-        ];
+  <!-- Modal نافذة الطلب -->
+  <div id="orderModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
+    <div class="modal-bg w-full max-w-md rounded-2xl p-6 border border-gray-800 shadow-2xl relative">
+      
+      <button onclick="closeModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white font-bold text-lg">✕</button>
+      
+      <h3 id="modalTitle" class="text-lg font-bold text-orange-500 mb-4 text-center"></h3>
 
-        let selectedProduct = null;
-        let selectedOffer = null;
+      <div class="space-y-4">
+        <div class="bg-zinc-900 p-3 rounded-lg border border-gray-800 text-sm">
+          <p><span class="text-gray-400">العرض:</span> <span id="modalOffer" class="font-bold text-white"></span></p>
+          <p><span class="text-gray-400">السعر:</span> <span id="modalPrice" class="font-bold text-orange-400"></span> دينار</p>
+        </div>
 
-        function renderProducts() {
-            const grid = document.getElementById('productsGrid');
-            grid.innerHTML = products.map(p => `
-                <div onclick="selectProduct('${p.id}')" id="prod-${p.id}" class="bg-[#1E1E1E] rounded-[10px] p-4 text-center border border-[#333] hover:border-[#FF6B00] cursor-pointer transition-all">
-                    <p class="font-bold">${p.displayName}</p>
-                    <p class="text-xs text-gray-400 mt-1">${p.description}</p>
-                </div>
-            `).join('');
+        <div>
+          <label class="block text-xs font-bold text-gray-300 mb-1">معرّف الحساب (Player ID / Username):</label>
+          <input type="text" id="player-id" placeholder="أدخل ID حسابك هنا" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-300 mb-1">طريقة الدفع:</label>
+          <select id="payment-method" onchange="updatePaymentDetails()" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
+            <option value="تحويل رصيد">تحويل رصيد ليبيانا / مدار</option>
+            <option value="كارت شحن ليبيانا">كارت شحن ليبيانا</option>
+            <option value="كارت شحن مدار">كارت شحن مدار</option>
+            <option value="سداد">خدمة سداد / تداول</option>
+          </select>
+        </div>
+
+        <div id="payment-info-box" class="bg-orange-950/30 border border-orange-500/30 p-3 rounded-lg text-xs text-orange-300">
+          <p class="font-bold mb-1">رقم التحويل: <span class="text-white select-all">0913147002</span></p>
+          <p>قم بالتحويل إلى هذا الرقم ثم أدخل رقم هاتفك أدناه للتحقق.</p>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-300 mb-1">رقم الهاتف للتواصل:</label>
+          <input type="tel" id="customer-phone" placeholder="09XXXXXXXX" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
+        </div>
+
+        <!-- أزرار الإجراءات -->
+        <button onclick="submitOrder()" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md mt-2">تأكيد إرسال الطلب</button>
+        
+        <!-- زر الواتساب -->
+        <a href="https://wa.me/218913147002" target="_blank" class="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition-all shadow-md">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+          <span>تواصل معنا عبر واتساب</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center p-4 text-xs text-gray-600 border-t border-gray-800">
+    Tech Line Store &copy; 2026 - جميع الحقوق محفوظة
+  </footer>
+
+  <script>
+    let selectedGame = '';
+    let selectedOffer = '';
+    let selectedPrice = 0;
+
+    function openModal(gameName, selectId) {
+      const select = document.getElementById(selectId);
+      const selectedOption = select.options[select.selectedIndex];
+      
+      selectedGame = gameName;
+      selectedOffer = selectedOption.value;
+      selectedPrice = selectedOption.getAttribute('data-price');
+
+      document.getElementById('modalTitle').innerText = `إتمام الطلب: ${gameName}`;
+      document.getElementById('modalOffer').innerText = selectedOffer;
+      document.getElementById('modalPrice').innerText = selectedPrice;
+      
+      document.getElementById('orderModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('orderModal').classList.add('hidden');
+    }
+
+    function updatePaymentDetails() {
+      const method = document.getElementById('payment-method').value;
+      const box = document.getElementById('payment-info-box');
+      if (method.includes('كارت')) {
+        box.innerHTML = `<p class="font-bold mb-1">إرسال كروت الشحن:</p><p>يرجى إرسال رقم كارت الشحن عبر الواتساب مباشرة مع رقم الطلب.</p>`;
+      } else {
+        box.innerHTML = `<p class="font-bold mb-1">رقم التحويل: <span class="text-white select-all">0913147002</span></p><p>قم بالتحويل إلى هذا الرقم ثم أدخل رقم هاتفك أدناه للتحقق.</p>`;
+      }
+    }
+
+    async function submitOrder() {
+      const phone = document.getElementById('customer-phone').value.trim();
+      const playerId = document.getElementById('player-id').value.trim();
+      const paymentMethod = document.getElementById('payment-method').value;
+
+      if (!phone || !playerId) {
+        alert('الرجاء تعبئة جميع الحقول المطلوبة (ID ورقم الهاتف)');
+        return;
+      }
+
+      const orderData = {
+        customer_name: `معرّف الحساب: ${playerId}`,
+        phone: phone,
+        address: `طريقة الدفع: ${paymentMethod}`,
+        cart: [{ game: selectedGame, offer: selectedOffer, price: selectedPrice }],
+        total_price: parseFloat(selectedPrice)
+      };
+
+      try {
+        const response = await fetch('/.netlify/functions/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(orderData)
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          alert(`تم إرسال الطلب بنجاح! رقم الطلب: #${result.order.id}`);
+          closeModal();
+        } else {
+          alert(`خطأ: ${result.error || 'فشل إرسال الطلب'}`);
         }
-
-        function selectProduct(id) {
-            selectedProduct = products.find(p => p.id === id);
-            selectedOffer = null;
-            document.getElementById('checkoutSection').classList.add('hidden');
-
-            document.querySelectorAll('#productsGrid > div').forEach(el => el.classList.remove('border-[#FF6B00]', 'bg-[#2A2A2A]'));
-            document.getElementById(`prod-${id}`).classList.add('border-[#FF6B00]', 'bg-[#2A2A2A]');
-
-            const offersSection = document.getElementById('offersSection');
-            const offersTitle = document.getElementById('offersTitle');
-            const offersGrid = document.getElementById('offersGrid');
-
-            offersSection.classList.remove('hidden');
-            
-            if (selectedProduct.offers.length > 0) {
-                offersTitle.innerText = `اختر العرض - ${selectedProduct.name}`;
-                offersGrid.innerHTML = selectedProduct.offers.map((o, idx) => `
-                    <div onclick="selectOffer(${idx})" id="off-${idx}" class="bg-[#1E1E1E] rounded-lg p-5 text-center border border-[#333] hover:border-[#FF6B00] cursor-pointer transition-all">
-                        <p class="font-bold">${o.name}</p>
-                        <p class="text-sm text-[#FF6B00] mt-1">${o.price} دينار</p>
-                    </div>
-                `).join('');
-            } else {
-                offersTitle.innerText = `العروض لـ ${selectedProduct.name} ستكون متاحة قريباً...`;
-                offersGrid.innerHTML = '';
-            }
-
-            offersSection.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function selectOffer(index) {
-            selectedOffer = selectedProduct.offers[index];
-
-            document.querySelectorAll('#offersGrid > div').forEach(el => el.classList.remove('border-[#FF6B00]', 'bg-[#2A2A2A]'));
-            document.getElementById(`off-${index}`).classList.add('border-[#FF6B00]', 'bg-[#2A2A2A]');
-
-            const checkoutSection = document.getElementById('checkoutSection');
-            document.getElementById('checkoutTitle').innerText = `إتمام الطلب: ${selectedProduct.name} - ${selectedOffer.name}`;
-            document.getElementById('offerSummary').innerHTML = `
-                <p><strong>العرض:</strong> ${selectedOffer.name}</p>
-                <p><strong>السعر:</strong> ${selectedOffer.price} دينار</p>
-            `;
-
-            checkoutSection.classList.remove('hidden');
-            checkoutSection.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function togglePaymentFields() {
-            const method = document.getElementById('paymentMethod').value;
-            const libyanaField = document.getElementById('libyanaField');
-            const transferField = document.getElementById('transferField');
-            const cardCodeInput = document.getElementById('cardCode');
-
-            if (method === 'libyana') {
-                libyanaField.classList.remove('hidden');
-                transferField.classList.add('hidden');
-                cardCodeInput.required = true;
-            } else {
-                libyanaField.classList.add('hidden');
-                transferField.classList.remove('hidden');
-                cardCodeInput.required = false;
-            }
-        }
-
-        function trackOrder() {
-            const id = document.getElementById('trackInput').value.trim();
-            if (id) {
-                alert(`جاري تتبع الطلب رقم: ${id}`);
-            } else {
-                alert('⚠️ الرجاء إدخال رقم الطلب');
-            }
-        }
-
-        async function submitOrder(e) {
-            e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            btn.innerText = 'جاري الإرسال...';
-            btn.disabled = true;
-
-            const playerId = document.getElementById('playerId').value;
-            const paymentMethod = document.getElementById('paymentMethod').value;
-            const cardCode = document.getElementById('cardCode').value;
-            const phoneNumber = document.getElementById('phoneNumber').value;
-
-            const payload = {
-                customer_name: `${selectedProduct ? selectedProduct.displayName : ''} - ID: ${playerId}`,
-                phone: phoneNumber,
-                address: `طريقة الدفع: ${paymentMethod} | الكارت/الرمز: ${cardCode || 'تحويل'}`,
-                cart: [
-                    {
-                        product: selectedProduct ? selectedProduct.name : '',
-                        offer: selectedOffer ? selectedOffer.name : '',
-                        playerId: playerId,
-                        paymentMethod: paymentMethod
-                    }
-                ],
-                total_price: selectedOffer ? parseFloat(selectedOffer.price) : 0
-            };
-
-            try {
-                const response = await fetch('/.netlify/functions/orders', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                const result = await response.json();
-
-                if (result.success) {
-                    alert(`✅ تم إرسال الطلب بنجاح!\nرقم الطلب الخاص بك هو: #${result.order.id}`);
-                    document.getElementById('orderForm').reset();
-                    document.getElementById('checkoutSection').classList.add('hidden');
-                    document.getElementById('offersSection').classList.add('hidden');
-                } else {
-                    alert('⚠️ حدث خطأ أثناء إرسال الطلب: ' + (result.error || 'حاول مرة أخرى'));
-                }
-            } catch (err) {
-                console.error(err);
-                alert('⚠️ تعذر الاتصال بالخادم، يرجى المحاولة لاحقاً.');
-            } finally {
-                btn.innerText = 'تأكيد إرسال الطلب';
-                btn.disabled = false;
-            }
-        }
-
-        renderProducts();
-    </script>
+      } catch (error) {
+        alert(`خطأ في الاتصال بالسيرفر: ${error.message}`);
+      }
+    }
+  </script>
 </body>
 </html>
