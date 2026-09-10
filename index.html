@@ -35,59 +35,82 @@
   <!-- المحتوى الرئيسي -->
   <main class="container mx-auto px-4 py-8 space-y-10">
     <div>
-      <h2 class="text-xl font-bold mb-6 text-center text-gray-200">اختر الخدمة المطلوبة للشحن</h2>
+      <h2 class="text-xl font-bold mb-6 text-center text-gray-200">اختر البطاقة المطلوبة للشحن</h2>
 
       <!-- بطاقات الخدمات -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
-        <!-- ببجي موبايل -->
+        <!-- بطاقات آيتونز (iTunes) -->
         <div class="card-bg rounded-2xl p-6 border border-gray-800 hover:border-orange-500 transition-all shadow-lg flex flex-col justify-between">
           <div>
-            <h3 class="text-xl font-extrabold text-orange-500 mb-2">ببجي موبايل (PUBG UC)</h3>
-            <p class="text-gray-400 text-sm mb-4">شحن شدات ببجي الرسمية بالمعرّف (ID) - شحن فوري</p>
+            <h3 class="text-xl font-extrabold text-orange-500 mb-2">iTunes Gift Cards</h3>
+            <p class="text-gray-400 text-sm mb-4">بطاقات آيتونز (يصلك الكود مباشرة)</p>
             <div class="space-y-2 mb-6">
-              <label class="block text-xs font-bold text-gray-300">اختر العرض:</label>
-              <select id="pubg-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
-                <option value="UC 60" data-price="14.200">UC 60 - 14.200 دينار</option>
-                <option value="UC 325" data-price="68.500">UC 325 - 68.500 دينار</option>
-                <option value="UC 660" data-price="136.800">UC 660 - 136.800 دينار</option>
+              <label class="block text-xs font-bold text-gray-300">اختر الباقة:</label>
+              <select id="itunes-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
+                <option value="iTunes 2$" data-price="27.000">iTunes 2$ - 27.000 دينار</option>
+                <option value="iTunes 3$" data-price="40.500">iTunes 3$ - 40.500 دينار</option>
+                <option value="iTunes 4$" data-price="54.000">iTunes 4$ - 54.000 دينار</option>
+                <option value="iTunes 5$" data-price="67.500">iTunes 5$ - 67.500 دينار</option>
+                <option value="iTunes 10$" data-price="135.000">iTunes 10$ - 135.000 دينار</option>
+                <option value="iTunes 15$" data-price="202.500">iTunes 15$ - 202.500 دينار</option>
+                <option value="iTunes 20$" data-price="270.000">iTunes 20$ - 270.000 دينار</option>
+                <option value="iTunes 25$" data-price="337.500">iTunes 25$ - 337.500 دينار</option>
               </select>
             </div>
           </div>
-          <button onclick="openModal('ببجي موبايل (PUBG UC)', 'pubg-offers', false)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب الآن</button>
+          <button onclick="openModal('iTunes Gift Cards', 'itunes-offers', true)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب كود</button>
         </div>
 
-        <!-- فري فاير -->
+        <!-- بلايستيشن أمريكي (PSN USA) -->
         <div class="card-bg rounded-2xl p-6 border border-gray-800 hover:border-orange-500 transition-all shadow-lg flex flex-col justify-between">
           <div>
-            <h3 class="text-xl font-extrabold text-orange-500 mb-2">فري فاير (Free Fire)</h3>
-            <p class="text-gray-400 text-sm mb-4">شحن جوهر فري فاير بالمعرّف (ID) - شحن فوري</p>
+            <h3 class="text-xl font-extrabold text-orange-500 mb-2">PlayStation Network USA</h3>
+            <p class="text-gray-400 text-sm mb-4">بطاقات ستور أمريكي (أكواد رقمية)</p>
             <div class="space-y-2 mb-6">
-              <label class="block text-xs font-bold text-gray-300">اختر العرض:</label>
-              <select id="ff-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
-                <option value="110 Diamonds" data-price="15.800">110 Diamonds - 15.800 دينار</option>
-                <option value="210 Diamonds" data-price="30.500">210 Diamonds - 30.500 دينار</option>
+              <label class="block text-xs font-bold text-gray-300">اختر الباقة:</label>
+              <select id="psn-usa-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
+                <option value="PSN 10$" data-price="130.150">PSN 10$ - 130.150 دينار</option>
+                <option value="PSN 25$" data-price="325.350">PSN 25$ - 325.350 دينار</option>
               </select>
             </div>
           </div>
-          <button onclick="openModal('فري فاير (Free Fire)', 'ff-offers', false)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب الآن</button>
+          <button onclick="openModal('PlayStation Network USA', 'psn-usa-offers', true)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب كود</button>
         </div>
 
-        <!-- آيتونز تركي (أكواد رقمية) -->
+        <!-- بلايستيشن إماراتي (PSN UAE) -->
         <div class="card-bg rounded-2xl p-6 border border-gray-800 hover:border-orange-500 transition-all shadow-lg flex flex-col justify-between">
           <div>
-            <h3 class="text-xl font-extrabold text-orange-500 mb-2">iTunes & App Store (TR)</h3>
-            <p class="text-gray-400 text-sm mb-4">بطاقات آيتونز (يصلك الكود في لوحة الطلب)</p>
+            <h3 class="text-xl font-extrabold text-orange-500 mb-2">PlayStation Network UAE</h3>
+            <p class="text-gray-400 text-sm mb-4">بطاقات ستور إماراتي (أكواد رقمية)</p>
             <div class="space-y-2 mb-6">
-              <label class="block text-xs font-bold text-gray-300">اختر العرض:</label>
-              <select id="itunes-tr" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
-                <option value="iTunes 25 TL" data-price="10.500">25 TL - 10.500 دينار</option>
-                <option value="iTunes 50 TL" data-price="20.000">50 TL - 20.000 دينار</option>
-                <option value="iTunes 100 TL" data-price="39.000">100 TL - 39.000 دينار</option>
+              <label class="block text-xs font-bold text-gray-300">اختر الباقة:</label>
+              <select id="psn-uae-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
+                <option value="PSN - UAE $10" data-price="132.250">PSN - UAE $10 - 132.250 دينار</option>
+                <option value="PSN - UAE $20" data-price="264.500">PSN - UAE $20 - 264.500 دينار</option>
               </select>
             </div>
           </div>
-          <button onclick="openModal('iTunes TR (كود)', 'itunes-tr', true)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب كود</button>
+          <button onclick="openModal('PlayStation Network UAE', 'psn-uae-offers', true)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب كود</button>
+        </div>
+
+        <!-- ريزر غولد (Razer Gold) -->
+        <div class="card-bg rounded-2xl p-6 border border-gray-800 hover:border-orange-500 transition-all shadow-lg flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-extrabold text-orange-500 mb-2">Razer Gold</h3>
+            <p class="text-gray-400 text-sm mb-4">شحن ريزر غولد (أكواد رقمية)</p>
+            <div class="space-y-2 mb-6">
+              <label class="block text-xs font-bold text-gray-300">اختر الباقة:</label>
+              <select id="razer-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
+                <option value="Razer 1$ Gold" data-price="13.400">Razer 1$ Gold - 13.400 دينار</option>
+                <option value="Razer 2$ Gold" data-price="26.700">Razer 2$ Gold - 26.700 دينار</option>
+                <option value="Razer 5$ Gold" data-price="66.850">Razer 5$ Gold - 66.850 دينار</option>
+                <option value="Razer 10$ Gold" data-price="133.700">Razer 10$ Gold - 133.700 دينار</option>
+                <option value="Razer 20$ Gold" data-price="267.400">Razer 20$ Gold - 267.400 دينار</option>
+              </select>
+            </div>
+          </div>
+          <button onclick="openModal('Razer Gold', 'razer-offers', true)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب كود</button>
         </div>
 
       </div>
@@ -126,12 +149,12 @@
       <div class="space-y-4">
         <div class="bg-zinc-900 p-3 rounded-lg border border-gray-800 text-sm">
           <p><span class="text-gray-400">العرض:</span> <span id="modalOffer" class="font-bold text-white"></span></p>
-          <p><span class="text-gray-400">السعر:</span> <span id="modalPrice" class="font-bold text-orange-400"></span> دينار</p>
+          <p><span class="text-gray-400">السعر الصافي:</span> <span id="modalPrice" class="font-bold text-orange-400"></span> دينار</p>
         </div>
 
         <div id="input-field-container">
-          <label id="input-label" class="block text-xs font-bold text-gray-300 mb-1">معرّف الحساب (Player ID):</label>
-          <input type="text" id="target-input" placeholder="أدخل ID حسابك هنا" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
+          <label id="input-label" class="block text-xs font-bold text-gray-300 mb-1">ملاحظة أو البريد (اختياري):</label>
+          <input type="text" id="target-input" placeholder="اختياري لاستلام الكود" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
         </div>
 
         <div>
@@ -163,7 +186,7 @@
     <div class="modal-bg w-full max-w-md rounded-2xl p-6 border border-gray-800 shadow-2xl text-center space-y-4">
       <h3 class="text-xl font-bold text-green-500">تم إرسال طلبك بنجاح!</h3>
       <p class="text-sm text-gray-300">رقم طلبك: <span id="res-order-id" class="font-bold text-orange-400"></span></p>
-      <p class="text-xs text-gray-400">احتفظ برقم هاتفك للبحث عن طلبك واستلام الكود أو الشحن فور مراجعته على الرقم 0944235295.</p>
+      <p class="text-xs text-gray-400">احتفظ برقم هاتفك للبحث عن طلبك واستلام الكود فور مراجعته على الرقم 0944235295.</p>
       <button onclick="location.reload()" class="w-full bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-2.5 rounded-xl">إغلاق</button>
     </div>
   </div>
@@ -211,13 +234,8 @@
       const label = document.getElementById('input-label');
       const input = document.getElementById('target-input');
       
-      if (isCodeProduct) {
-        label.innerText = 'ملاحظة أو البريد (اختياري):';
-        input.placeholder = 'اختياري لاستلام الكود';
-      } else {
-        label.innerText = 'معرّف الحساب (Player ID):';
-        input.placeholder = 'أدخل ID حسابك هنا';
-      }
+      label.innerText = 'ملاحظة أو البريد لاستلام الكود (اختياري):';
+      input.placeholder = 'اختياري';
 
       document.getElementById('orderModal').classList.remove('hidden');
     }
@@ -248,7 +266,7 @@
       }
 
       const orderData = {
-        customer_name: isCodeProduct ? `طلب كود (ملاحظة: ${targetInput || 'لا يوجد'})` : `معرّف الحساب: ${targetInput}`,
+        customer_name: `طلب كود (ملاحظة: ${targetInput || 'لا يوجد'})`,
         phone: phone,
         address: `${paymentType}: ${paymentDetails}`,
         cart: [{ game: selectedGame, offer: selectedOffer, price: selectedPrice }],
@@ -303,7 +321,7 @@
               <p class="text-orange-400 font-bold">طلب رقم #${o.id} - ${item.game} (${item.offer})</p>
               <p class="text-gray-300">طريقة الدفع: ${o.address}</p>
               <div class="mt-2 bg-black/40 p-2 rounded border border-orange-500/30">
-                <span class="text-gray-400">الكود أو حالة الشحن:</span>
+                <span class="text-gray-400">الكود الرقمي:</span>
                 <p class="text-white font-mono font-bold select-all mt-1">${o.admin_code || 'قيد المراجعة من الأدمن...'}</p>
               </div>
             </div>
