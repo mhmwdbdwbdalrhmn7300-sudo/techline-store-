@@ -14,75 +14,106 @@
     .modal-bg { background-color: #1e1e1e; }
   </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between">
+<body class="min-h-screen flex flex-col justify-between" onload="trackVisit()">
 
   <!-- الهيدر -->
   <header class="card-bg border-b border-gray-800 p-4 sticky top-0 z-40">
     <div class="container mx-auto flex justify-between items-center">
       <h1 class="text-2xl font-extrabold text-orange-500 tracking-wider">TECH LINE</h1>
-      <a href="https://wa.me/218913147002" target="_blank" class="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg text-sm font-bold transition-all">
-        <span>واتساب</span>
-      </a>
+      <div class="flex items-center gap-2">
+        <a href="#support-section" class="bg-zinc-800 hover:bg-zinc-700 text-white px-3 py-1.5 rounded-lg text-sm font-bold transition-all">الدعم الفني</a>
+        <a href="https://wa.me/218944235295" target="_blank" class="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg text-sm font-bold transition-all">واتساب</a>
+      </div>
     </div>
   </header>
 
+  <!-- شريط الرسائل والتنبيهات الإدارية -->
+  <div id="admin-notice-bar" class="hidden bg-orange-600 text-white text-center py-2 px-4 text-sm font-bold">
+    <span id="notice-text"></span>
+  </div>
+
   <!-- المحتوى الرئيسي -->
-  <main class="container mx-auto px-4 py-8">
-    <h2 class="text-xl font-bold mb-6 text-center text-gray-200">اختر الخدمة المطلوبة</h2>
+  <main class="container mx-auto px-4 py-8 space-y-10">
+    <div>
+      <h2 class="text-xl font-bold mb-6 text-center text-gray-200">اختر الخدمة المطلوبة للشحن</h2>
 
-    <!-- بطاقات الخدمات -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      
-      <!-- ببجي موبايل -->
-      <div class="card-bg rounded-2xl p-6 border border-gray-800 hover:border-orange-500 transition-all shadow-lg flex flex-col justify-between">
-        <div>
-          <h3 class="text-xl font-extrabold text-orange-500 mb-2">ببجي موبايل (PUBG UC)</h3>
-          <p class="text-gray-400 text-sm mb-4">شحن شدات ببجي الرسمية بالمعرّف (ID)</p>
-          <div class="space-y-2 mb-6">
-            <label class="block text-xs font-bold text-gray-300">اختر العرض:</label>
-            <select id="pubg-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
-              <option value="UC 60" data-price="13.5">UC 60 - 13.5 دينار</option>
-              <option value="UC 325" data-price="65.0">UC 325 - 65.0 دينار</option>
-              <option value="UC 660" data-price="130.0">UC 660 - 130.0 دينار</option>
-            </select>
+      <!-- بطاقات الخدمات -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- ببجي موبايل -->
+        <div class="card-bg rounded-2xl p-6 border border-gray-800 hover:border-orange-500 transition-all shadow-lg flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-extrabold text-orange-500 mb-2">ببجي موبايل (PUBG UC)</h3>
+            <p class="text-gray-400 text-sm mb-4">شحن شدات ببجي الرسمية بالمعرّف (ID) - شحن فوري</p>
+            <div class="space-y-2 mb-6">
+              <label class="block text-xs font-bold text-gray-300">اختر العرض:</label>
+              <select id="pubg-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
+                <option value="UC 60" data-price="13.5">UC 60 - 13.5 دينار</option>
+                <option value="UC 325" data-price="65.0">UC 325 - 65.0 دينار</option>
+                <option value="UC 660" data-price="130.0">UC 660 - 130.0 دينار</option>
+              </select>
+            </div>
           </div>
+          <button onclick="openModal('ببجي موبايل (PUBG UC)', 'pubg-offers', false)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب الآن</button>
         </div>
-        <button onclick="openModal('ببجي موبايل (PUBG UC)', 'pubg-offers', true)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب الآن</button>
-      </div>
 
-      <!-- فري فاير -->
-      <div class="card-bg rounded-2xl p-6 border border-gray-800 hover:border-orange-500 transition-all shadow-lg flex flex-col justify-between">
-        <div>
-          <h3 class="text-xl font-extrabold text-orange-500 mb-2">فراي فاير (Free Fire)</h3>
-          <p class="text-gray-400 text-sm mb-4">شحن جوهر فري فاير فورياً بالمعرّف (ID)</p>
-          <div class="space-y-2 mb-6">
-            <label class="block text-xs font-bold text-gray-300">اختر العرض:</label>
-            <select id="ff-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
-              <option value="110 Diamonds" data-price="15.0">110 Diamonds - 15.0 دينار</option>
-              <option value="210 Diamonds" data-price="29.0">210 Diamonds - 29.0 دينار</option>
-            </select>
+        <!-- فري فاير -->
+        <div class="card-bg rounded-2xl p-6 border border-gray-800 hover:border-orange-500 transition-all shadow-lg flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-extrabold text-orange-500 mb-2">فري فاير (Free Fire)</h3>
+            <p class="text-gray-400 text-sm mb-4">شحن جوهر فري فاير بالمعرّف (ID) - شحن فوري</p>
+            <div class="space-y-2 mb-6">
+              <label class="block text-xs font-bold text-gray-300">اختر العرض:</label>
+              <select id="ff-offers" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
+                <option value="110 Diamonds" data-price="15.0">110 Diamonds - 15.0 دينار</option>
+                <option value="210 Diamonds" data-price="29.0">210 Diamonds - 29.0 دينار</option>
+              </select>
+            </div>
           </div>
+          <button onclick="openModal('فري فاير (Free Fire)', 'ff-offers', false)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب الآن</button>
         </div>
-        <button onclick="openModal('فراي فاير (Free Fire)', 'ff-offers', true)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب الآن</button>
-      </div>
 
-      <!-- آيتونز تركي (أكواد رقمية) -->
-      <div class="card-bg rounded-2xl p-6 border border-gray-800 hover:border-orange-500 transition-all shadow-lg flex flex-col justify-between">
-        <div>
-          <h3 class="text-xl font-extrabold text-orange-500 mb-2">iTunes & App Store (TR)</h3>
-          <p class="text-gray-400 text-sm mb-4">بطاقات آيتونز (يصلك الكود فور مراجعته)</p>
-          <div class="space-y-2 mb-6">
-            <label class="block text-xs font-bold text-gray-300">اختر العرض:</label>
-            <select id="itunes-tr" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
-              <option value="iTunes 25 TL" data-price="10.0">25 TL - 10.0 دينار</option>
-              <option value="iTunes 50 TL" data-price="19.0">50 TL - 19.0 دينار</option>
-              <option value="iTunes 100 TL" data-price="37.0">100 TL - 37.0 دينار</option>
-            </select>
+        <!-- آيتونز تركي (أكواد رقمية) -->
+        <div class="card-bg rounded-2xl p-6 border border-gray-800 hover:border-orange-500 transition-all shadow-lg flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-extrabold text-orange-500 mb-2">iTunes & App Store (TR)</h3>
+            <p class="text-gray-400 text-sm mb-4">بطاقات آيتونز (يصلك الكود في لوحة الطلب)</p>
+            <div class="space-y-2 mb-6">
+              <label class="block text-xs font-bold text-gray-300">اختر العرض:</label>
+              <select id="itunes-tr" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm focus:outline-none focus:border-orange-500">
+                <option value="iTunes 25 TL" data-price="10.0">25 TL - 10.0 دينار</option>
+                <option value="iTunes 50 TL" data-price="19.0">50 TL - 19.0 دينار</option>
+                <option value="iTunes 100 TL" data-price="37.0">100 TL - 37.0 دينار</option>
+              </select>
+            </div>
           </div>
+          <button onclick="openModal('iTunes TR (كود)', 'itunes-tr', true)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب كود</button>
         </div>
-        <button onclick="openModal('iTunes TR (كود)', 'itunes-tr', false, true)" class="w-full accent-bg text-white font-bold py-3 rounded-xl transition-all shadow-md">طلب كود</button>
-      </div>
 
+      </div>
+    </div>
+
+    <!-- قسم تتبع الطلب واستلام الكود -->
+    <div class="card-bg rounded-2xl p-6 border border-gray-800 max-w-xl mx-auto shadow-xl">
+      <h3 class="text-lg font-bold text-orange-500 mb-2 text-center">استعلم عن طلبك أو كودك</h3>
+      <p class="text-xs text-gray-400 mb-4 text-center">أدخل رقم هاتفك الذي استخدمته في الطلب لمعرفة حالة طلبك واستلام الكود الرقمي:</p>
+      <div class="flex gap-2">
+        <input type="text" id="track-phone" placeholder="أدخل رقم هاتفك (09XXXXXXXX)" class="flex-1 bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
+        <button onclick="checkOrderStatus()" class="bg-zinc-800 hover:bg-zinc-700 text-white font-bold px-5 py-3 rounded-lg text-sm">بحث</button>
+      </div>
+      <div id="track-result" class="mt-4 hidden space-y-3"></div>
+    </div>
+
+    <!-- قسم الدعم الفني والبلاغات -->
+    <div id="support-section" class="card-bg rounded-2xl p-6 border border-gray-800 max-w-xl mx-auto shadow-xl">
+      <h3 class="text-lg font-bold text-orange-500 mb-2 text-center">الدعم الفني والشكاوى</h3>
+      <p class="text-xs text-gray-400 mb-4 text-center">واجهتك مشكلة أو تريد الاستفسار؟ أرسل بلاغك وسنرد عليك قريباً:</p>
+      <div class="space-y-3">
+        <input type="text" id="ticket-name" placeholder="اسمك الكريم" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
+        <input type="tel" id="ticket-phone" placeholder="رقم هاتفك للتواصل" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
+        <textarea id="ticket-message" placeholder="اكتب تفاصيل المشكلة أو البلاغ هنا..." rows="3" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500"></textarea>
+        <button onclick="sendTicket()" class="w-full bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-3 rounded-lg text-sm transition-all">إرسال البلاغ</button>
+      </div>
     </div>
   </main>
 
@@ -104,16 +135,17 @@
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-gray-300 mb-1">طريقة الدفع (ليبيانا فقط):</label>
-          <select id="payment-method" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
-            <option value="تحويل رصيد ليبيانا">تحويل رصيد ليبيانا</option>
-            <option value="كارت شحن ليبيانا">كارت شحن ليبيانا</option>
+          <label class="block text-xs font-bold text-gray-300 mb-1">طريقة الدفع عبر ليبيانا:</label>
+          <select id="payment-method-type" onchange="togglePaymentInput()" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500 mb-2">
+            <option value="تحويل رصيد ليبيانا">تحويل رصيد ليبيانا المباشر</option>
+            <option value="كارت شحن ليبيانا">إرسال رقم كارت شحن ليبيانا</option>
           </select>
+          <input type="text" id="payment-details" placeholder="أدخل رقم الهاتف الذي حولت منه الرصيد" class="w-full bg-zinc-900 border border-gray-700 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-orange-500">
         </div>
 
         <div class="bg-orange-950/30 border border-orange-500/30 p-3 rounded-lg text-xs text-orange-300">
-          <p class="font-bold mb-1">رقم التحويل الرسمي: <span class="text-white select-all font-mono">0913147002</span></p>
-          <p>قم بالتحويل للقيمة المطلوبة ثم اضغط تأكيد الطلب.</p>
+          <p class="font-bold mb-1">رقم التحويل أو الشحن الرسمي: <span class="text-white select-all font-mono">0944235295</span></p>
+          <p>قم بتحويل القيمة المطلوبة أو إرسال الكارت ثم أكد الطلب.</p>
         </div>
 
         <div>
@@ -126,12 +158,12 @@
     </div>
   </div>
 
-  <!-- Modal متابعة الطلب والكود -->
+  <!-- Modal رسالة النجاح -->
   <div id="successModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
     <div class="modal-bg w-full max-w-md rounded-2xl p-6 border border-gray-800 shadow-2xl text-center space-y-4">
       <h3 class="text-xl font-bold text-green-500">تم إرسال طلبك بنجاح!</h3>
       <p class="text-sm text-gray-300">رقم طلبك: <span id="res-order-id" class="font-bold text-orange-400"></span></p>
-      <p class="text-xs text-gray-400">سيتم شحن حسابك أو إرسال الكود بعد التحقق من تحويل الرصيد على الرقم 0913147002.</p>
+      <p class="text-xs text-gray-400">احتفظ برقم هاتفك للبحث عن طلبك واستلام الكود أو الشحن فور مراجعته على الرقم 0944235295.</p>
       <button onclick="location.reload()" class="w-full bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-2.5 rounded-xl">إغلاق</button>
     </div>
   </div>
@@ -146,7 +178,25 @@
     let selectedPrice = 0;
     let isCodeProduct = false;
 
-    function openModal(gameName, selectId, needsId, isCode = false) {
+    async function trackVisit() {
+      try {
+        await fetch('/.netlify/functions/orders?action=visit', { method: 'POST' });
+        loadNotice();
+      } catch (e) {}
+    }
+
+    async function loadNotice() {
+      try {
+        const res = await fetch('/.netlify/functions/orders?action=get_notice');
+        const data = await res.json();
+        if (data && data.notice) {
+          document.getElementById('notice-text').innerText = data.notice;
+          document.getElementById('admin-notice-bar').classList.remove('hidden');
+        }
+      } catch (e) {}
+    }
+
+    function openModal(gameName, selectId, isCode) {
       const select = document.getElementById(selectId);
       const selectedOption = select.options[select.selectedIndex];
       selectedGame = gameName;
@@ -162,8 +212,8 @@
       const input = document.getElementById('target-input');
       
       if (isCodeProduct) {
-        label.innerText = 'ملاحظة أو البريد (اختياري لاستلام الكود):';
-        input.placeholder = 'اختياري';
+        label.innerText = 'ملاحظة أو البريد (اختياري):';
+        input.placeholder = 'اختياري لاستلام الكود';
       } else {
         label.innerText = 'معرّف الحساب (Player ID):';
         input.placeholder = 'أدخل ID حسابك هنا';
@@ -176,22 +226,34 @@
       document.getElementById('orderModal').classList.add('hidden');
     }
 
+    function togglePaymentInput() {
+      const type = document.getElementById('payment-method-type').value;
+      const details = document.getElementById('payment-details');
+      if (type === 'كارت شحن ليبيانا') {
+        details.placeholder = 'أدخل أرقام كارت الشحن هنا';
+      } else {
+        details.placeholder = 'أدخل رقم الهاتف الذي حولت منه الرصيد';
+      }
+    }
+
     async function submitOrder() {
       const phone = document.getElementById('customer-phone').value.trim();
       const targetInput = document.getElementById('target-input').value.trim();
-      const paymentMethod = document.getElementById('payment-method').value;
+      const paymentType = document.getElementById('payment-method-type').value;
+      const paymentDetails = document.getElementById('payment-details').value.trim();
 
-      if (!phone) {
-        alert('الرجاء إدخال رقم الهاتف للتواصل');
+      if (!phone || !paymentDetails) {
+        alert('الرجاء إدخال رقم هاتفك وتفاصيل الدفع (الرقم المحول منه أو الكارت)');
         return;
       }
 
       const orderData = {
         customer_name: isCodeProduct ? `طلب كود (ملاحظة: ${targetInput || 'لا يوجد'})` : `معرّف الحساب: ${targetInput}`,
         phone: phone,
-        address: `الدفع: ${paymentMethod}`,
+        address: `${paymentType}: ${paymentDetails}`,
         cart: [{ game: selectedGame, offer: selectedOffer, price: selectedPrice }],
-        total_price: parseFloat(selectedPrice)
+        total_price: parseFloat(selectedPrice),
+        admin_code: 'قيد المراجعة...'
       };
 
       try {
@@ -207,10 +269,76 @@
           document.getElementById('res-order-id').innerText = `#${result.order.id}`;
           document.getElementById('successModal').classList.remove('hidden');
         } else {
-          alert(`خطأ: ${result.error || 'فشل إرسال الطلب'}`);
+          alert('فشل إرسال الطلب، تأكد من البيانات');
         }
       } catch (error) {
-        alert(`خطأ في الاتصال: ${error.message}`);
+        alert('خطأ في الاتصال بالسيرفر');
+      }
+    }
+
+    async function checkOrderStatus() {
+      const phone = document.getElementById('track-phone').value.trim();
+      const resBox = document.getElementById('track-result');
+      if (!phone) {
+        alert('أدخل رقم الهاتف للبحث');
+        return;
+      }
+
+      try {
+        const response = await fetch('/.netlify/functions/orders');
+        const orders = await response.json();
+        const userOrders = orders.filter(o => o.phone === phone);
+
+        resBox.classList.remove('hidden');
+        if (userOrders.length === 0) {
+          resBox.innerHTML = `<p class="text-xs text-red-400 text-center">لا توجد طلبات مسجلة بهذا الرقم.</p>`;
+          return;
+        }
+
+        let html = '';
+        userOrders.reverse().forEach(o => {
+          const item = o.cart && o.cart[0] ? o.cart[0] : { game: '', offer: '' };
+          html += `
+            <div class="bg-zinc-900 border border-gray-700 p-3 rounded-xl text-xs space-y-1">
+              <p class="text-orange-400 font-bold">طلب رقم #${o.id} - ${item.game} (${item.offer})</p>
+              <p class="text-gray-300">طريقة الدفع: ${o.address}</p>
+              <div class="mt-2 bg-black/40 p-2 rounded border border-orange-500/30">
+                <span class="text-gray-400">الكود أو حالة الشحن:</span>
+                <p class="text-white font-mono font-bold select-all mt-1">${o.admin_code || 'قيد المراجعة من الأدمن...'}</p>
+              </div>
+            </div>
+          `;
+        });
+        resBox.innerHTML = html;
+      } catch (e) {
+        alert('حدث خطأ أثناء البحث');
+      }
+    }
+
+    async function sendTicket() {
+      const name = document.getElementById('ticket-name').value.trim();
+      const phone = document.getElementById('ticket-phone').value.trim();
+      const message = document.getElementById('ticket-message').value.trim();
+
+      if (!name || !phone || !message) {
+        alert('الرجاء إبداء جميع الحقول للبلاغ');
+        return;
+      }
+
+      try {
+        const res = await fetch('/.netlify/functions/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'ticket', name, phone, message })
+        });
+        if (res.ok) {
+          alert('تم إرسال بلاغك بنجاح وسنراجعه قريباً!');
+          document.getElementById('ticket-name').value = '';
+          document.getElementById('ticket-phone').value = '';
+          document.getElementById('ticket-message').value = '';
+        }
+      } catch (e) {
+        alert('خطأ في إرسال البلاغ');
       }
     }
   </script>
