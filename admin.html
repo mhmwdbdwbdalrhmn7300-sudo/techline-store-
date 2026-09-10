@@ -11,78 +11,130 @@
     .card-bg { background-color: #1e1e1e; }
   </style>
 </head>
-<body class="min-h-screen p-4 md:p-8">
+<body class="min-h-screen p-4 md:p-8 space-y-6">
 
-  <div class="container mx-auto">
-    <!-- الهيدر -->
-    <div class="flex justify-between items-center mb-8 card-bg p-4 rounded-2xl border border-gray-800">
+  <div class="container mx-auto space-y-6">
+    <!-- الهيدر والإحصائيات -->
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4 card-bg p-5 rounded-2xl border border-gray-800">
       <h1 class="text-2xl font-extrabold text-orange-500">لوحة تحكم الأدمن - Tech Line</h1>
-      <a href="index.html" target="_blank" class="bg-zinc-800 hover:bg-zinc-700 text-white px-4 py-2 rounded-xl text-sm font-bold">عرض المتجر</a>
+      <div class="flex items-center gap-4">
+        <div class="bg-zinc-900 border border-gray-700 px-4 py-2 rounded-xl text-sm">
+          <span>إجمالي الزيارات للموقع: </span>
+          <span id="visit-count" class="font-bold text-orange-400">...</span>
+        </div>
+        <a href="index.html" target="_blank" class="bg-zinc-800 hover:bg-zinc-700 text-white px-4 py-2 rounded-xl text-sm font-bold">عرض المتجر</a>
+      </div>
+    </div>
+
+    <!-- قسم تعيين رسالة التنبيه في المتجر (مثل نفاد الكمية) -->
+    <div class="card-bg rounded-2xl border border-gray-800 p-5 shadow-xl space-y-3">
+      <h2 class="text-lg font-bold text-gray-200">تحديث شريط التنبيهات في واجهة الزبون</h2>
+      <p class="text-xs text-gray-400">استخدم هذا الزر لكتابة إشعار يظهر لكل الزبائن (مثلاً: "تنبيه: نفدت بطاقات الأيتونز 25 مؤقتاً وسيتم توفيرها قريباً"). اتركه فارغاً لإخفائه.</p>
+      <div class="flex gap-2">
+        <input type="text" id="notice-input" placeholder="اكتب رسالة التنبيه للزبائن هنا..." class="flex-1 bg-zinc-900 border border-gray-700 text-white text-sm p-3 rounded-lg focus:outline-none focus:border-orange-500">
+        <button onclick="saveNotice()" class="bg-orange-600 hover:bg-orange-700 text-white font-bold px-6 py-3 rounded-lg text-sm transition-all">حفظ وتحديث الشريط</button>
+      </div>
     </div>
 
     <!-- جدول الطلبات -->
     <div class="card-bg rounded-2xl border border-gray-800 p-4 overflow-x-auto shadow-xl">
-      <h2 class="text-lg font-bold mb-4 text-gray-200">الطلبات الواردة (ليبيانا فقط)</h2>
-      
+      <h2 class="text-lg font-bold mb-4 text-gray-200">الطلبات الواردة والشحن والأكواد</h2>
       <table class="w-full text-right border-collapse text-sm">
         <thead>
           <tr class="border-b border-gray-800 text-gray-400">
             <th class="p-3">رقم الطلب</th>
-            <th class="p-3">البيانات / المعرّف</th>
-            <th class="p-3">الخدمة والمنتج</th>
+            <th class="p-3">بيانات الحساب</th>
+            <th class="p-3">الخدمة المطلوبة</th>
             <th class="p-3">الهاتف والدفع</th>
-            <th class="p-3">إدخال الكود الرقمي</th>
+            <th class="p-3">إدخال الكود / النتيجة</th>
             <th class="p-3">الإجراء</th>
           </tr>
         </thead>
         <tbody id="orders-table-body">
-          <tr><td colspan="6" class="text-center py-6 text-gray-400" id="loading">جاري تحميل الطلبات...</td></tr>
+          <tr><td colspan="6" class="text-center py-6 text-gray-400">جاري التحميل...</td></tr>
         </tbody>
       </table>
+    </div>
+
+    <!-- قسم بلاغات ودعم الزبائن -->
+    <div class="card-bg rounded-2xl border border-gray-800 p-4 shadow-xl">
+      <h2 class="text-lg font-bold mb-4 text-gray-200">بلاغات وشكاوي الزبائن (الدعم الفني)</h2>
+      <div id="tickets-container" class="space-y-3">
+        <p class="text-xs text-gray-500 text-center py-4">لا توجد بلاغات حالياً.</p>
+      </div>
     </div>
   </div>
 
   <script>
-    async function fetchOrders() {
+    async function fetchAdminData() {
       try {
         const response = await fetch('/.netlify/functions/orders');
-        const orders = await response.json();
-        const tbody = document.getElementById('orders-table-body');
-        tbody.innerHTML = '';
-
-        if (!orders || orders.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="6" class="text-center py-6 text-gray-500">لا توجد طلبات جديدة حالياً.</td></tr>`;
-          return;
+        const data = await response.json();
+        
+        // جلب الإحصائيات والرسائل
+        document.getElementById('visit-count').innerText = data.visits || 0;
+        if (data.notice) {
+          document.getElementById('notice-input').value = data.notice;
         }
 
-        orders.reverse().forEach(order => {
-          const cartItem = order.cart && order.cart[0] ? order.cart[0] : { game: 'غير محدد', offer: '', price: order.total_price };
-          
-          const tr = document.createElement('tr');
-          tr.className = 'border-b border-gray-800/60 hover:bg-zinc-900/40';
-          tr.innerHTML = `
-            <td class="p-3 font-mono font-bold text-orange-400">#${order.id}</td>
-            <td class="p-3 font-bold text-white">${order.customer_name}</td>
-            <td class="p-3">
-              <div class="text-orange-300 font-bold">${cartItem.game}</div>
-              <div class="text-xs text-gray-400">${cartItem.offer} - <span class="text-orange-400">${cartItem.price} د.ل</span></div>
-            </td>
-            <td class="p-3">
-              <div class="text-white font-mono">${order.phone}</div>
-              <div class="text-xs text-gray-400">${order.address}</div>
-            </td>
-            <td class="p-3">
-              <input type="text" id="code-${order.id}" value="${order.admin_code || ''}" placeholder="أدخل الكود هنا..." class="bg-zinc-900 border border-gray-700 text-white text-xs p-2 rounded-lg w-40 focus:outline-none focus:border-orange-500">
-            </td>
-            <td class="p-3 flex gap-2 items-center">
-              <button onclick="saveCode('${order.id}')" class="bg-orange-600 hover:bg-orange-700 text-white text-xs px-3 py-2 rounded-lg font-bold transition-all">حفظ</button>
-              <button onclick="deleteOrder('${order.id}')" class="bg-red-900/40 hover:bg-red-900 text-red-300 text-xs px-2.5 py-2 rounded-lg transition-all">حذف</button>
-            </td>
-          `;
-          tbody.appendChild(tr);
-        });
+        // تعبئة جدول الطلبات
+        const tbody = document.getElementById('orders-table-body');
+        tbody.innerHTML = '';
+        const orders = data.orders || [];
+
+        if (orders.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="6" class="text-center py-6 text-gray-500">لا توجد طلبات جديدة حالياً.</td></tr>`;
+        } else {
+          orders.reverse().forEach(order => {
+            const cartItem = order.cart && order.cart[0] ? order.cart[0] : { game: 'غير محدد', offer: '', price: order.total_price };
+            const tr = document.createElement('tr');
+            tr.className = 'border-b border-gray-800/60 hover:bg-zinc-900/40';
+            tr.innerHTML = `
+              <td class="p-3 font-mono font-bold text-orange-400">#${order.id}</td>
+              <td class="p-3 font-bold text-white">${order.customer_name}</td>
+              <td class="p-3">
+                <div class="text-orange-300 font-bold">${cartItem.game}</div>
+                <div class="text-xs text-gray-400">${cartItem.offer} - <span class="text-orange-400">${cartItem.price} د.ل</span></div>
+              </td>
+              <td class="p-3">
+                <div class="text-white font-mono">${order.phone}</div>
+                <div class="text-xs text-gray-400">${order.address}</div>
+              </td>
+              <td class="p-3">
+                <input type="text" id="code-${order.id}" value="${order.admin_code !== 'قيد المراجعة...' ? order.admin_code : ''}" placeholder="أدخل الكود أو تم الشحن..." class="bg-zinc-900 border border-gray-700 text-white text-xs p-2 rounded-lg w-44 focus:outline-none focus:border-orange-500">
+              </td>
+              <td class="p-3 flex gap-2 items-center">
+                <button onclick="saveCode('${order.id}')" class="bg-orange-600 hover:bg-orange-700 text-white text-xs px-3 py-2 rounded-lg font-bold transition-all">حفظ</button>
+                <button onclick="deleteOrder('${order.id}')" class="bg-red-900/40 hover:bg-red-900 text-red-300 text-xs px-2.5 py-2 rounded-lg transition-all">حذف</button>
+              </td>
+            `;
+            tbody.appendChild(tr);
+          });
+        }
+
+        // تعبئة البلاغات
+        const ticketsContainer = document.getElementById('tickets-container');
+        const tickets = data.tickets || [];
+        if (tickets.length === 0) {
+          ticketsContainer.innerHTML = `<p class="text-xs text-gray-500 text-center py-4">لا توجد بلاغات حالياً.</p>`;
+        } else {
+          let tHtml = '';
+          tickets.reverse().forEach(t => {
+            tHtml += `
+              <div class="bg-zinc-900 border border-gray-800 p-3 rounded-xl text-xs space-y-1">
+                <div class="flex justify-between font-bold text-orange-400">
+                  <span>الاسم: ${t.name} (هاتف: ${t.phone})</span>
+                  <button onclick="deleteTicket('${t.id}')" class="text-red-400 hover:text-red-300">حذف البلاغ</button>
+                </div>
+                <p class="text-gray-300 mt-1">${t.message}</p>
+              </div>
+            `;
+          });
+          ticketsContainer.innerHTML = tHtml;
+        }
+
       } catch (error) {
-        console.error('خطأ في جلب الطلبات:', error);
+        console.error('خطأ في تحميل بيانات الأدمن:', error);
       }
     }
 
@@ -95,10 +147,10 @@
           body: JSON.stringify({ admin_code: codeInput })
         });
         if (response.ok) {
-          alert('تم حفظ الكود بنجاح!');
-          fetchOrders();
+          alert('تم الحفظ بنجاح!');
+          fetchAdminData();
         } else {
-          alert('فشل حفظ الكود');
+          alert('فشل الحفظ');
         }
       } catch (error) {
         alert('خطأ في الاتصال');
@@ -112,17 +164,43 @@
           method: 'DELETE'
         });
         if (response.ok) {
-          fetchOrders();
+          fetchAdminData();
         } else {
-          alert('فشل الحذف');
+          alert('فشل الحذف من السيرفر');
         }
       } catch (error) {
         alert('خطأ في الاتصال');
       }
     }
 
-    fetchOrders();
-    setInterval(fetchOrders, 10000);
+    async function deleteTicket(id) {
+      if (!confirm('حذف هذا البلاغ؟')) return;
+      try {
+        await fetch(`/.netlify/functions/orders?ticket_id=${id}`, { method: 'DELETE' });
+        fetchAdminData();
+      } catch (e) {
+        alert('فشل حذف البلاغ');
+      }
+    }
+
+    async function saveNotice() {
+      const noticeText = document.getElementById('notice-input').value.trim();
+      try {
+        const res = await fetch('/.netlify/functions/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'set_notice', notice: noticeText })
+        });
+        if (res.ok) {
+          alert('تم تحديث شريط التنبيهات في الموقع بنجاح!');
+        }
+      } catch (e) {
+        alert('فشل تحديث الشريط');
+      }
+    }
+
+    fetchAdminData();
+    setInterval(fetchAdminData, 10000);
   </script>
 </body>
 </html>
