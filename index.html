@@ -50,7 +50,7 @@
             <form id="orderForm" onsubmit="submitOrder(event)" class="space-y-4">
                 <div>
                     <label class="block text-sm mb-1">معرّف الحساب (Player ID / Username):</label>
-                    <input type="text" name="playerId" required class="w-full p-3 rounded border border-[#444] bg-[#2A2A2A] text-white focus:outline-none focus:border-[#FF6B00]">
+                    <input type="text" name="playerId" id="playerId" required class="w-full p-3 rounded border border-[#444] bg-[#2A2A2A] text-white focus:outline-none focus:border-[#FF6B00]">
                 </div>
 
                 <div>
@@ -73,7 +73,7 @@
 
                 <div>
                     <label class="block text-sm mb-1">رقم الهاتف للتواصل:</label>
-                    <input type="text" name="phoneNumber" required class="w-full p-3 rounded border border-[#444] bg-[#2A2A2A] text-white focus:outline-none focus:border-[#FF6B00]">
+                    <input type="text" name="phoneNumber" id="phoneNumber" required class="w-full p-3 rounded border border-[#444] bg-[#2A2A2A] text-white focus:outline-none focus:border-[#FF6B00]">
                 </div>
 
                 <button type="submit" id="submitBtn" class="w-full bg-[#FF6B00] text-white p-4 rounded font-bold hover:opacity-90 transition-opacity">تأكيد إرسال الطلب</button>
@@ -177,20 +177,56 @@
             }
         }
 
-        function submitOrder(e) {
+        async function submitOrder(e) {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
             btn.innerText = 'جاري الإرسال...';
             btn.disabled = true;
 
-            setTimeout(() => {
-                alert('✅ تم إرسال الطلب بنجاح!');
+            const playerId = document.getElementById('playerId').value;
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const cardCode = document.getElementById('cardCode').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
+
+            const payload = {
+                customer_name: `${selectedProduct ? selectedProduct.displayName : ''} - ID: ${playerId}`,
+                phone: phoneNumber,
+                address: `طريقة الدفع: ${paymentMethod} | الكارت/الرمز: ${cardCode || 'تحويل'}`,
+                cart: [
+                    {
+                        product: selectedProduct ? selectedProduct.name : '',
+                        offer: selectedOffer ? selectedOffer.name : '',
+                        playerId: playerId,
+                        paymentMethod: paymentMethod
+                    }
+                ],
+                total_price: selectedOffer ? parseFloat(selectedOffer.price) : 0
+            };
+
+            try {
+                const response = await fetch('/.netlify/functions/orders', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert(`✅ تم إرسال الطلب بنجاح!\nرقم الطلب الخاص بك هو: #${result.order.id}`);
+                    document.getElementById('orderForm').reset();
+                    document.getElementById('checkoutSection').classList.add('hidden');
+                    document.getElementById('offersSection').classList.add('hidden');
+                } else {
+                    alert('⚠️ حدث خطأ أثناء إرسال الطلب: ' + (result.error || 'حاول مرة أخرى'));
+                }
+            } catch (err) {
+                console.error(err);
+                alert('⚠️ تعذر الاتصال بالخادم، يرجى المحاولة لاحقاً.');
+            } finally {
                 btn.innerText = 'تأكيد إرسال الطلب';
                 btn.disabled = false;
-                document.getElementById('orderForm').reset();
-                document.getElementById('checkoutSection').classList.add('hidden');
-                document.getElementById('offersSection').classList.add('hidden');
-            }, 1000);
+            }
         }
 
         renderProducts();
